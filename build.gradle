@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+ext {
+    libraryTag = 'master-SNAPSHOT'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "net.ericsson.emovs.mobile.referenceapp"
+        minSdkVersion 19
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode buildVersionCode()
+        versionName version
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    if (project.hasProperty('hasParentProject')) {
+        compile project(':libraries:all')
+    }
+    else {
+        compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
+    }
+    compile 'com.android.support:appcompat-v7:26.0.1'
+    compile 'com.android.support:design:26.0.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:support-v4:26.0.0'
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    compile 'com.android.support:recyclerview-v7:25.0.+'
+    testCompile 'junit:junit:4.12'
+}

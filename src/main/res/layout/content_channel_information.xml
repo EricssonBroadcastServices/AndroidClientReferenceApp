@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include android:id="@+id/toolbar" layout="@layout/toolbar" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/carousel_epg_items"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbarThumbHorizontal="@drawable/thumb"
+            android:layout_below="@+id/toolbar"
+            android:layout_gravity="top" />
+
+    </RelativeLayout>
+</LinearLayout>
