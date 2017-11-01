@@ -36,7 +36,7 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     if (project.hasProperty('hasParentProject')) {
-        compile project(':libraries:all')
+        compile project(':libraries:playback')
     }
     else {
         compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
