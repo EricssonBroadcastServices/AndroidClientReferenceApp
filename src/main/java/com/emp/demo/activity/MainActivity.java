@@ -1,5 +1,6 @@
 package com.emp.demo.activity;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 
+import com.emp.demo.app.AppController;
 import com.emp.demo.fragments.FragmentDrawer;
 import com.emp.demo.R;
 import com.emp.demo.adapters.PagerAdapter;
@@ -79,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
         //displayView(0);
+
+        AppController.requestStoragePermission(this);
     }
 
 
