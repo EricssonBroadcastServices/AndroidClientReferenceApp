@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ebs.android.exposure.models.EmpChannel;
+import com.ebs.android.exposure.models.EmpImage;
 import com.ebs.android.exposure.models.EmpProgram;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
@@ -105,14 +106,19 @@ public class EpgCarouselAdapter extends RecyclerView.Adapter<EpgCarouselAdapter.
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         public void render(final EmpProgram asset) {
-            titleView.setText(asset.title);
+            titleView.setText(asset.originalTitle);
             dayRefView.setText(asset.timeHumanRefernce(EmpProgram.DateRef.START));
             timeRefView.setText(asset.getTime(EmpProgram.DateRef.START) + " - " + asset.getTime(EmpProgram.DateRef.END));
-            if (asset.imageUrl != null) {
-                Picasso.with(root.getApplicationContext()).load(asset.imageUrl).into(imageView);
+            EmpImage image = asset.getImage("en", EmpImage.Orientation.PORTRAIT);
+            if(image == null) {
+                image = asset.getImage("en", EmpImage.Orientation.LANDSCAPE);
+            }
+            if (image != null && image.url != null) {
+                Picasso.with(root.getApplicationContext()).load(image.url).into(imageView);
             }
             else {
-                imageView.setImageResource(R.drawable.noposter);
+                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(imageView);
+
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

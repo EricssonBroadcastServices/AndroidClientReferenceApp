@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ebs.android.exposure.models.EmpImage;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.ebs.android.exposure.models.EmpEpisode;
@@ -100,11 +101,19 @@ public class EpisodesCarouselAdapter extends RecyclerView.Adapter<EpisodesCarous
         }
 
         public void render(final EmpEpisode asset) {
-            titleView.setText(asset.title);
+            titleView.setText(asset.originalTitle);
             //dayRefView.setText(asset.timeHumanRefernce(EmpProgram.DateRef.START));
             episodeNumberView.setText("Episode " + asset.episodeNr);
-            if (asset.imageUrl != null) {
-                Picasso.with(root.getApplicationContext()).load(asset.imageUrl).into(imageView);
+            EmpImage image = asset.getImage("en", EmpImage.Orientation.PORTRAIT);
+            if(image == null) {
+                image = asset.getImage("en", EmpImage.Orientation.LANDSCAPE);
+            }
+            if (image != null && image.url != null) {
+                Picasso.with(root.getApplicationContext()).load(image.url).into(imageView);
+            }
+            else {
+                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(imageView);
+
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

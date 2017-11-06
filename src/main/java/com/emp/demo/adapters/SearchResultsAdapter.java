@@ -58,7 +58,7 @@ public class SearchResultsAdapter extends BaseAdapter {
         view.setTag(asset);
 
         TextView channelNameView = (TextView) view.findViewById(R.id.asset_title);
-        channelNameView.setText(asset.title);
+        channelNameView.setText(asset.originalTitle);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,7 +2,6 @@ package com.emp.demo.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ebs.android.exposure.entitlements.EntitledRunnable;
 import com.ebs.android.exposure.entitlements.Entitlement;
 import com.ebs.android.exposure.interfaces.IPlayable;
 import com.ebs.android.exposure.models.EmpAsset;
-import com.ebs.android.exposure.models.EmpOfflineAsset;
+import com.ebs.android.exposure.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.app.AppController;
 import com.squareup.picasso.Picasso;
@@ -168,10 +166,17 @@ public class DownloadListAdapter extends BaseAdapter {
 
         if (item.getOnlinePlayable() instanceof EmpAsset) {
             EmpAsset asset = (EmpAsset) item.getOnlinePlayable();
-            assetTitleView.setText(asset.title);
-            if(asset.imageUrl != null) {
+            assetTitleView.setText(asset.originalTitle);
+            EmpImage image = asset.getImage("en", EmpImage.Orientation.PORTRAIT);
+            if(image == null) {
+                image = asset.getImage("en", EmpImage.Orientation.LANDSCAPE);
+            }
+            if (image != null && image.url != null) {
+                Picasso.with(root.getApplicationContext()).load(image.url).fit().into(assetImageView);
+            }
+            else {
+                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(assetImageView);
 
-                Picasso.with(root.getApplicationContext()).load(asset.imageUrl).fit().into(assetImageView);
             }
         }
 
