@@ -29,7 +29,19 @@ public class MyDownloads extends AppCompatActivity {
     }
 
     void loadUi() {
-        ArrayList<IDownload> downloadItems = EMPDownloadProvider.getInstance().getDownloads();
+        ArrayList<IDownload> downloadItems = new ArrayList<>();
+
+        ArrayList<IDownload> queued = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_QUEUED);
+        ArrayList<IDownload> paused = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_PAUSED);
+        ArrayList<IDownload> downloading = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_DOWNLOADING);
+        ArrayList<IDownload> failed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_FAILED);
+        ArrayList<IDownload> completed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_COMPLETED);
+
+        downloadItems.addAll(completed);
+        downloadItems.addAll(downloading);
+        downloadItems.addAll(paused);
+        downloadItems.addAll(queued);
+        downloadItems.addAll(failed);
 
         this.downloadListAdapter = new DownloadListAdapter(this, downloadItems);
 
