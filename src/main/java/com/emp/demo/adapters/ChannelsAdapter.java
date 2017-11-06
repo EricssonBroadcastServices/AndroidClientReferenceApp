@@ -67,9 +67,6 @@ public class ChannelsAdapter extends BaseAdapter {
         TextView channelNameView = (TextView) view.findViewById(R.id.channel_name);
         ImageView channelLogoView = (ImageView) view.findViewById(R.id.channel_logo);
 
-        // holder.date = (TextView) view.findViewById(R.id.date);
-        // holder.description = (TextView) view.findViewById(R.id.description);
-        // holder.img = (ImageView) view.findViewById(R.id.news_img);
 
         channelNameView.setText(channel.name);
         if (channel.logoUrl != null) {

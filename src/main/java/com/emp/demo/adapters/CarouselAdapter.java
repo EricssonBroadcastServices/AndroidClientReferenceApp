@@ -35,18 +35,6 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
         LayoutInflater inflater = (LayoutInflater) this.root.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.carousel_item, parent, false);
         final CarouselAdapter.ViewHolder holder = new CarouselAdapter.ViewHolder(view);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent opn = new Intent(main.getContext(),News_Details.class);
-//                opn.putExtra("img", holder.img_str);
-//                opn.putExtra("heading",holder.hline_str);
-//                opn.putExtra("desc",holder.description_str);
-//                opn.putExtra("date",holder.date_str);
-//                opn.putExtra("source",holder.source_str);
-//                main.getContext().startActivity(opn);
-//            }
-//        });
         return holder;
     }
 
@@ -70,23 +58,11 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleView;
-        TextView durationView;
-        TextView descriptionView;
         ImageView imageView;
-
-//        String hline_str;
-//        String date_str;
-//        String description_str;
-//        String img_str;
-//        public String source_str;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            titleView = (TextView) itemView.findViewById(R.id.hline);
-//            durationView = (TextView) itemView.findViewById(R.id.duration);
-//            descriptionView = (TextView) itemView.findViewById(R.id.description);
-            imageView = (ImageView) itemView.findViewById(R.id.news_img);
+            imageView = (ImageView) itemView.findViewById(R.id.asset_img);
         }
 
         public void render(final EmpAsset asset) {

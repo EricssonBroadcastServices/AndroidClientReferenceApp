@@ -70,9 +70,7 @@ public class CarouselGroupAdapter extends BaseAdapter {
         //}
 
         TextView carouselTitleView = (TextView) view.findViewById(R.id.carousel_title);
-        // holder.date = (TextView) view.findViewById(R.id.date);
-        // holder.description = (TextView) view.findViewById(R.id.description);
-        // holder.img = (ImageView) view.findViewById(R.id.news_img);
+
 
         carouselTitleView.setText(carousel.name);
 
