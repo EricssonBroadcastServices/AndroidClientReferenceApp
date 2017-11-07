@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ebs.android.exposure.models.EmpChannel;
+import com.ebs.android.exposure.models.EmpImage;
+import com.ebs.android.exposure.models.LocalizedMetadata;
 import com.emp.demo.R;
 import com.emp.demo.activity.ChannelDetails;
+import com.emp.demo.app.AppController;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -67,10 +70,13 @@ public class ChannelsAdapter extends BaseAdapter {
         TextView channelNameView = (TextView) view.findViewById(R.id.channel_name);
         ImageView channelLogoView = (ImageView) view.findViewById(R.id.channel_logo);
 
-
-        channelNameView.setText(channel.name);
-        if (channel.logoUrl != null) {
-            Picasso.with(root.getApplicationContext()).load(channel.logoUrl).into(channelLogoView);
+        channelNameView.setText(channel.localized.getTitle("en"));
+        EmpImage image = AppController.getImage(channel.localized);
+        if (image != null && image.url != null) {
+            Picasso.with(root.getApplicationContext()).load(image.url).into(channelLogoView);
+        }
+        else {
+            Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(channelLogoView);
         }
 
         view.setOnClickListener(new View.OnClickListener() {

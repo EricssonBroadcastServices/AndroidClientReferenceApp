@@ -167,16 +167,12 @@ public class DownloadListAdapter extends BaseAdapter {
         if (item.getOnlinePlayable() instanceof EmpAsset) {
             EmpAsset asset = (EmpAsset) item.getOnlinePlayable();
             assetTitleView.setText(asset.originalTitle);
-            EmpImage image = asset.getImage("en", EmpImage.Orientation.PORTRAIT);
-            if(image == null) {
-                image = asset.getImage("en", EmpImage.Orientation.LANDSCAPE);
-            }
+            EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
                 Picasso.with(root.getApplicationContext()).load(image.url).fit().into(assetImageView);
             }
             else {
                 Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(assetImageView);
-
             }
         }
 

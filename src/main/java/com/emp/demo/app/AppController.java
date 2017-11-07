@@ -17,6 +17,8 @@ import android.support.v7.app.AlertDialog;
 
 import com.ebs.android.exposure.auth.EMPAuthProvider;
 import com.ebs.android.exposure.auth.EMPAuthProviderWithStorage;
+import com.ebs.android.exposure.models.EmpImage;
+import com.ebs.android.exposure.models.LocalizedMetadata;
 import com.ebs.android.utilities.ViewHelper;
 import com.emp.demo.R;
 import com.emp.demo.activity.MyDownloads;
@@ -130,5 +132,13 @@ public class AppController extends Application {
                 ActivityCompat.requestPermissions(actvity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 541);
             }
         }
+    }
+
+    public static EmpImage getImage(LocalizedMetadata metadata) {
+        EmpImage image = metadata.getImage("en", EmpImage.Orientation.PORTRAIT);
+        if(image == null) {
+            image = metadata.getImage("en", EmpImage.Orientation.LANDSCAPE);
+        }
+        return image;
     }
 }

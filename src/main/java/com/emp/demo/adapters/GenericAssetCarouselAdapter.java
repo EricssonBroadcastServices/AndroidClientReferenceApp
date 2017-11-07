@@ -95,16 +95,12 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
         public void render(final EmpAsset asset) {
             titleView.setText(asset.originalTitle);
             //dayRefView.setText(asset.timeHumanRefernce(EmpProgram.DateRef.START));
-            EmpImage image = asset.getImage("en", EmpImage.Orientation.PORTRAIT);
-            if(image == null) {
-                image = asset.getImage("en", EmpImage.Orientation.LANDSCAPE);
-            }
+            EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
                 Picasso.with(root.getApplicationContext()).load(image.url).into(imageView);
             }
             else {
                 Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(imageView);
-
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

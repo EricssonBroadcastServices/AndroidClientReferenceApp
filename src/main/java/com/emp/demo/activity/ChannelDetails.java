@@ -24,7 +24,7 @@ public class ChannelDetails extends AppCompatActivity {
         setContentView(R.layout.activity_channel_information);
 
         EmpChannel channel = (EmpChannel) getIntent().getExtras().get("channel");
-        loadActionBar(channel.name);
+        loadActionBar(channel.localized.getTitle("en"));
         loadUi(channel);
     }
 

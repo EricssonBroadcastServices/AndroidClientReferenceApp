@@ -22,7 +22,7 @@ public class SeriesDetails extends AppCompatActivity {
         setContentView(R.layout.activity_series_episodes);
 
         EmpSeries series = (EmpSeries) getIntent().getExtras().get("series");
-        loadActionBar(series.name);
+        loadActionBar(series.localized.getTitle("en"));
         loadUi(series);
     }
 

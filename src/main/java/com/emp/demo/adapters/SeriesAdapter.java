@@ -10,9 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ebs.android.exposure.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.activity.SeriesDetails;
 import com.ebs.android.exposure.models.EmpSeries;
+import com.emp.demo.app.AppController;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,9 +66,13 @@ public class SeriesAdapter extends BaseAdapter {
         TextView channelNameView = (TextView) view.findViewById(R.id.series_name);
         ImageView channelLogoView = (ImageView) view.findViewById(R.id.series_logo);
 
-        channelNameView.setText(series.name);
-        if (series.logoUrl != null) {
-            Picasso.with(root.getApplicationContext()).load(series.logoUrl).into(channelLogoView);
+        channelNameView.setText(series.localized.getTitle("en"));
+        EmpImage image = AppController.getImage(series.localized);
+        if (image != null && image.url != null) {
+            Picasso.with(root.getApplicationContext()).load(image.url).into(channelLogoView);
+        }
+        else {
+            Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(channelLogoView);
         }
 
         view.setOnClickListener(new View.OnClickListener() {

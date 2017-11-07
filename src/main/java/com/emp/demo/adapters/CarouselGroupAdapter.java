@@ -72,7 +72,7 @@ public class CarouselGroupAdapter extends BaseAdapter {
         TextView carouselTitleView = (TextView) view.findViewById(R.id.carousel_title);
 
 
-        carouselTitleView.setText(carousel.name);
+        carouselTitleView.setText(carousel.localized.getTitle("en"));
 
         return view;
     }
