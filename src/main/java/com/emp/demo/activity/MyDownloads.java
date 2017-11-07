@@ -31,11 +31,11 @@ public class MyDownloads extends AppCompatActivity {
     void loadUi() {
         ArrayList<IDownload> downloadItems = new ArrayList<>();
 
-        ArrayList<IDownload> queued = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_QUEUED);
-        ArrayList<IDownload> paused = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_PAUSED);
-        ArrayList<IDownload> downloading = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_DOWNLOADING);
-        ArrayList<IDownload> failed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_FAILED);
-        ArrayList<IDownload> completed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.STATE_COMPLETED);
+        ArrayList<IDownload> queued = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.State.QUEUED);
+        ArrayList<IDownload> paused = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.State.PAUSED);
+        ArrayList<IDownload> downloading = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.State.DOWNLOADING);
+        ArrayList<IDownload> failed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.State.FAILED);
+        ArrayList<IDownload> completed = EMPDownloadProvider.getInstance().getDownloads(DownloadItem.State.COMPLETED);
 
         downloadItems.addAll(completed);
         downloadItems.addAll(downloading);

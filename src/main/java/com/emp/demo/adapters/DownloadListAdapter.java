@@ -178,7 +178,7 @@ public class DownloadListAdapter extends BaseAdapter {
 
         assetSizeView.setText(StorageMetrics.formatSize(item.getDownloadedSize()));
 
-        if (item.getState() == DownloadItem.STATE_COMPLETED) {
+        if (item.getState() == DownloadItem.State.COMPLETED) {
             stateView.setText("");
             progressView.setVisibility(View.GONE);
             pauseBtnView.setVisibility(View.GONE);
@@ -207,7 +207,7 @@ public class DownloadListAdapter extends BaseAdapter {
                 }
             });
         }
-        else if (item.getState() == DownloadItem.STATE_FAILED) {
+        else if (item.getState() == DownloadItem.State.FAILED) {
             progressView.setVisibility(View.GONE);
             playBtnView.setVisibility(View.GONE);
             pauseBtnView.setVisibility(View.GONE);
@@ -216,10 +216,10 @@ public class DownloadListAdapter extends BaseAdapter {
             assetSizeView.setVisibility(View.GONE);
             stateView.setText("ERROR");
         }
-        else if (item.getState() == DownloadItem.STATE_DOWNLOADING) {
+        else if (item.getState() == DownloadItem.State.DOWNLOADING) {
             downloadStartUi(item, runnableStartDownload);
         }
-        else if (item.getState() == DownloadItem.STATE_PAUSED) {
+        else if (item.getState() == DownloadItem.State.PAUSED) {
             stateView.setText("");
             progressView.setVisibility(View.VISIBLE);
             playBtnView.setVisibility(View.GONE);
@@ -229,7 +229,7 @@ public class DownloadListAdapter extends BaseAdapter {
             assetSizeView.setVisibility(View.VISIBLE);
             progressView.setText(Integer.toString((int) Math.round(item.getProgress())) + " %");
         }
-        else if (item.getState() == DownloadItem.STATE_QUEUED) {
+        else if (item.getState() == DownloadItem.State.QUEUED) {
             progressView.setVisibility(View.GONE);
             playBtnView.setVisibility(View.GONE);
             pauseBtnView.setVisibility(View.GONE);
