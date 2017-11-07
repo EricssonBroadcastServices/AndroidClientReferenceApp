@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.ebs.android.exposure.metadata.EMPMetadataProvider;
+import com.ebs.android.exposure.metadata.queries.EpgQueryParameters;
 import com.ebs.android.exposure.models.EmpChannel;
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpgCarouselAdapter;
@@ -38,7 +39,7 @@ public class ChannelDetails extends AppCompatActivity {
         epgCarousel.setLayoutManager(layoutManager);
 
         if(channel.programs == null) {
-            EMPMetadataProvider.getInstance().getEpg(channel.channelId, new EpgCallback(epgCarousel));
+            EMPMetadataProvider.getInstance().getEpg(channel.channelId, new EpgCallback(epgCarousel), EpgQueryParameters.DEFAULT);
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ebs.android.exposure.metadata.EMPMetadataProvider;
+import com.ebs.android.exposure.metadata.queries.ChannelsQueryParameters;
 import com.emp.demo.R;
 import com.emp.demo.adapters.ChannelsAdapter;
 import com.emp.demo.callbacks.ChannelsCallback;
@@ -37,7 +38,7 @@ public class ChannelsFragment extends Fragment {
         ListView channels = (ListView) rootView.findViewById(R.id.channel_list);
         channels.setAdapter(this.channelsAdapter);
 
-        EMPMetadataProvider.getInstance().getChannels(new ChannelsCallback(this.channelsAdapter));
+        EMPMetadataProvider.getInstance().getChannels(new ChannelsCallback(this.channelsAdapter), ChannelsQueryParameters.DEFAULT);
 
         return rootView;
     }
