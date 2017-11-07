@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.ebs.android.exposure.models.EmpAsset;
-import com.ebs.android.exposure.models.EmpImage;
+import net.ericsson.emovs.exposure.models.EmpAsset;
+import net.ericsson.emovs.exposure.models.EmpImage;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.squareup.picasso.Picasso;

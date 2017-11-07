@@ -15,16 +15,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
-import com.ebs.android.exposure.auth.EMPAuthProvider;
-import com.ebs.android.exposure.auth.EMPAuthProviderWithStorage;
-import com.ebs.android.exposure.models.EmpImage;
-import com.ebs.android.exposure.models.LocalizedMetadata;
-import com.ebs.android.utilities.ViewHelper;
+import net.ericsson.emovs.exposure.auth.EMPAuthProvider;
+import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
+import net.ericsson.emovs.exposure.models.EmpImage;
+import net.ericsson.emovs.exposure.models.LocalizedMetadata;
+import net.ericsson.emovs.utilities.ViewHelper;
 import com.emp.demo.R;
 import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
 
-import com.ebs.android.exposure.interfaces.IPlayable;
+import net.ericsson.emovs.exposure.interfaces.IPlayable;
 
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.playback.ui.views.OverlayPlayerView;
@@ -111,8 +111,8 @@ public class AppController extends Application {
         if (ContextCompat.checkSelfPermission(actvity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED)
         {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(actvity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(actvity, R.style.MyDialogTheme);
+            /*if (!ActivityCompat.shouldShowRequestPermissionRationale(actvity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(actvity, R.style.MyMaterialTheme);
                 alertBuilder.setCancelable(true);
                 alertBuilder.setTitle("Permission necessary");
                 alertBuilder.setMessage("Storage Permission is needed for download functionality.");
@@ -128,9 +128,9 @@ public class AppController extends Application {
                 });
                 AlertDialog alert = alertBuilder.create();
                 alert.show();
-            } else {
+            } else {*/
                 ActivityCompat.requestPermissions(actvity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 541);
-            }
+            //}
         }
     }
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.ebs.android.exposure.models.EmpAsset;
+import net.ericsson.emovs.exposure.models.EmpAsset;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 

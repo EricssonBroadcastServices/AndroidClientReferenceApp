@@ -2,9 +2,9 @@ package com.emp.demo.callbacks;
 
 import android.util.Log;
 
-import com.ebs.android.exposure.clients.exposure.ExposureError;
-import com.ebs.android.exposure.metadata.IMetadataCallback;
-import com.ebs.android.exposure.models.EmpChannel;
+import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
+import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
+import net.ericsson.emovs.exposure.models.EmpChannel;
 import com.emp.demo.adapters.ChannelsAdapter;
 
 import java.util.ArrayList;

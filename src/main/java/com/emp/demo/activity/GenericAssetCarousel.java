@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.ebs.android.exposure.metadata.EMPMetadataProvider;
+import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
 import com.emp.demo.R;
 import com.emp.demo.adapters.GenericAssetCarouselAdapter;
 import com.emp.demo.callbacks.AssetListCallback;

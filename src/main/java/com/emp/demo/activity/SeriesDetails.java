@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpisodesCarouselAdapter;
-import com.ebs.android.exposure.models.EmpSeries;
+import net.ericsson.emovs.exposure.models.EmpSeries;
 
 public class SeriesDetails extends AppCompatActivity {
     Toolbar mToolbar;

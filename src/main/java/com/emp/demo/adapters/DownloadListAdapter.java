@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ebs.android.exposure.entitlements.Entitlement;
-import com.ebs.android.exposure.interfaces.IPlayable;
-import com.ebs.android.exposure.models.EmpAsset;
-import com.ebs.android.exposure.models.EmpImage;
+import net.ericsson.emovs.exposure.entitlements.Entitlement;
+import net.ericsson.emovs.exposure.interfaces.IPlayable;
+import net.ericsson.emovs.exposure.models.EmpAsset;
+import net.ericsson.emovs.exposure.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.app.AppController;
 import com.squareup.picasso.Picasso;

@@ -10,9 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ebs.android.exposure.models.EmpChannel;
-import com.ebs.android.exposure.models.EmpImage;
-import com.ebs.android.exposure.models.LocalizedMetadata;
+import net.ericsson.emovs.exposure.models.EmpChannel;
+import net.ericsson.emovs.exposure.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.activity.ChannelDetails;
 import com.emp.demo.app.AppController;

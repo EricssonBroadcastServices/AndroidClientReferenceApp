@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.emp.demo.R;
-import com.ebs.android.exposure.models.EmpCarousel;
+import net.ericsson.emovs.exposure.models.EmpCarousel;
 
 import java.util.ArrayList;
 

@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.ebs.android.exposure.metadata.EMPMetadataProvider;
-import com.ebs.android.exposure.metadata.queries.EpgQueryParameters;
-import com.ebs.android.exposure.models.EmpChannel;
+import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
+import net.ericsson.emovs.exposure.metadata.queries.EpgQueryParameters;
+import net.ericsson.emovs.exposure.models.EmpChannel;
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpgCarouselAdapter;
 import com.emp.demo.callbacks.EpgCallback;

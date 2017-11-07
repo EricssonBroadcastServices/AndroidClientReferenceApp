@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ebs.android.exposure.models.EmpChannel;
-import com.ebs.android.exposure.models.EmpImage;
-import com.ebs.android.exposure.models.EmpProgram;
+import net.ericsson.emovs.exposure.models.EmpChannel;
+import net.ericsson.emovs.exposure.models.EmpImage;
+import net.ericsson.emovs.exposure.models.EmpProgram;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.squareup.picasso.Picasso;

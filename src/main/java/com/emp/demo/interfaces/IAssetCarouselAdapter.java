@@ -1,6 +1,6 @@
 package com.emp.demo.interfaces;
 
-import com.ebs.android.exposure.models.EmpAsset;
+import net.ericsson.emovs.exposure.models.EmpAsset;
 
 import java.util.ArrayList;
 

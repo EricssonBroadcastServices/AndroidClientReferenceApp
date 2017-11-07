@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ebs.android.exposure.clients.exposure.ExposureError;
-import com.ebs.android.exposure.interfaces.IAuthenticationListener;
+import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
+import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.github.ybq.android.spinkit.style.Circle;
