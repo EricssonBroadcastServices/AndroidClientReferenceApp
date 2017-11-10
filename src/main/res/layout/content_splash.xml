@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:layout_margin="50dp" />
+            android:layout_margin="125dp" />
 
     </LinearLayout>
 
@@ -124,7 +124,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:paddingBottom="5sp"
-        android:text="©2017 Enigma TV"
+        android:text="©2017 RedBee TV"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />
