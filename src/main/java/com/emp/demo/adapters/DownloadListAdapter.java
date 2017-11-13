@@ -2,6 +2,7 @@ package com.emp.demo.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import net.ericsson.emovs.download.interfaces.IDownloadEventListener;
 import net.ericsson.emovs.utilities.StorageMetrics;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import static com.emp.demo.R.id.pauseBtn;
 import static com.emp.demo.R.id.resumeBtn;
@@ -36,9 +39,11 @@ import static com.emp.demo.R.id.resumeBtn;
 
 public class DownloadListAdapter extends BaseAdapter {
     ArrayList<IDownload> downloadItems;
+    ArrayList<Pair<String, IDownload>> listenerKeys;
     Activity root;
 
     public DownloadListAdapter(Activity root, ArrayList<IDownload> downloadItems) {
+        this.listenerKeys = new ArrayList<>();
         this.downloadItems = downloadItems;
         this.root = root;
     }
@@ -110,6 +115,12 @@ public class DownloadListAdapter extends BaseAdapter {
                 runnable.run();
             }
         });
+    }
+
+    public void removeListeners() {
+        for (Pair<String,IDownload> key : this.listenerKeys) {
+            key.second.removeEventListener(key.first);
+        }
     }
 
     @Override
@@ -240,8 +251,11 @@ public class DownloadListAdapter extends BaseAdapter {
         }
 
         final View finalView = view;
-        // TODO: use key tag to prevent several listeners for the same adapter
-        item.addEventListener(new IDownloadEventListener() {
+
+        String adapterKey = UUID.randomUUID().toString();
+        this.listenerKeys.add(new Pair<>(adapterKey, item));
+
+        item.addEventListener(adapterKey, new IDownloadEventListener() {
             @Override
             public void onStart() {
                 root.runOnUiThread(new Runnable() {
@@ -254,6 +268,9 @@ public class DownloadListAdapter extends BaseAdapter {
 
             @Override
             public void onProgressUpdate(final double progress) {
+                if (progress < 0) {
+                    return;
+                }
                 final String newProgress = Integer.toString((int) Math.round(progress)) + " %";
                 if (progressView.getText().equals(newProgress) == false){
                     root.runOnUiThread(new Runnable() {

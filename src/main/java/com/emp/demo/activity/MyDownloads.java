@@ -64,6 +64,8 @@ public class MyDownloads extends AppCompatActivity {
         mToolbar.setTitle(title);
     }
 
+
+
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() == 3) {
@@ -85,5 +87,25 @@ public class MyDownloads extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        this.downloadListAdapter.removeListeners();
+        super.onDestroy();
+    }
 
 }
