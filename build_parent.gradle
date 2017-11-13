@@ -1,37 +1,8 @@
-ext {
-    libraryTag = 'r0.70.27'
-    compileSdkVersion = 26
-    buildToolsVersion = "26.0.1"
-    supportLibVersion = "26.0.1"
-    castFrameworkVersion = "10.0.1"
-}
-
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven { url "https://maven.google.com" }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-    }
-}
-
-allprojects {
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven { url "https://maven.google.com" }
-        maven { url "https://jitpack.io" }
-    }
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-        }
-    }
-}
-
 apply plugin: 'com.android.application'
+
+ext {
+    libraryTag = 'master-SNAPSHOT'
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -41,9 +12,7 @@ android {
         applicationId "net.ericsson.emovs.mobile.referenceapp"
         minSdkVersion 19
         targetSdkVersion rootProject.ext.compileSdkVersion
-        if (project.hasProperty('hasParentProject')) {
-            versionCode buildVersionCode()
-        }
+        versionCode buildVersionCode()
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -66,7 +35,12 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
+    if (project.hasProperty('hasParentProject')) {
+        compile project(':libraries:playback')
+    }
+    else {
+        compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
+    }
     compile 'com.android.support:appcompat-v7:26.0.1'
     compile 'com.android.support:design:26.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
