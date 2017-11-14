@@ -23,60 +23,41 @@ import net.ericsson.emovs.utilities.ViewHelper;
 import com.emp.demo.R;
 import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
+// import com.squareup.leakcanary.LeakCanary;
 
 import net.ericsson.emovs.exposure.interfaces.IPlayable;
 
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.playback.ui.views.OverlayPlayerView;
-import net.ericsson.emovs.utilities.ContextRegistry;
+import net.ericsson.emovs.utilities.EMPRegistry;
 
 import java.util.ArrayList;
-//import com.onesignal.OneSignal;
 
 
 public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
 
-    public static EMPAuthProvider mAuthProvider;
     private static AppController mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        //if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+        //    return;
+        //}
+        //LeakCanary.install(this);
         mInstance = this;
-        ContextRegistry.bind(this);
+        EMPRegistry.bindApplicationContext(this);
+        EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+
         try {
             EMPDownloadProvider.getInstance().startService();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mAuthProvider = EMPAuthProviderWithStorage.getInstance(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
-//    OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.WARN);
-//    OneSignal.startInit(this)
-//            .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
-//            .setAutoPromptLocation(true)
-//            .init();
     }
-	
-	/*private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
-        @Override
-        public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
-            String additionalMessage = "";
-
-            try {
-                if (additionalData != null) {
-                    if (additionalData.has("actionSelected"))
-                        additionalMessage += "Pressed ButtonID: " + additionalData.getString("actionSelected");
-
-                    additionalMessage = message + "\nFull additionalData:\n" + additionalData.toString();
-                }
-
-                Log.d("OneSignalExample", "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
-        }
-    }*/
 
     public static synchronized AppController getInstance() {
         return mInstance;

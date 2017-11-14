@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
 import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
 import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
 import com.emp.demo.app.AppController;
@@ -59,10 +60,10 @@ public class Splash extends Activity {
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        if (AppController.mAuthProvider.isAuthenticated()) {
+        if (EMPAuthProviderWithStorage.getInstance().isAuthenticated()) {
             loginContainer.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.VISIBLE);
-            AppController.mAuthProvider.checkAuth(new IAuthenticationListener() {
+            EMPAuthProviderWithStorage.getInstance().checkAuth(new IAuthenticationListener() {
                 @Override
                 public void onAuthSuccess(String sessionToken) {
                     mProgressBar.setVisibility(View.INVISIBLE);
@@ -96,7 +97,7 @@ public class Splash extends Activity {
                 EditText passwordView = (EditText) findViewById(R.id.input_password);
                 EditText mfaView = (EditText) findViewById(R.id.input_mfa);
 
-                AppController.mAuthProvider.login(
+                EMPAuthProviderWithStorage.getInstance().login(
                         true,
                         usernameView.getText().toString(),
                         passwordView.getText().toString(),

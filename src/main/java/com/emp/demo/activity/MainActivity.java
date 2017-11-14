@@ -27,6 +27,8 @@ import com.emp.demo.fragments.FragmentDrawer;
 import com.emp.demo.R;
 import com.emp.demo.adapters.PagerAdapter;
 
+import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
+
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     public ViewPager viewPager;
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void logout() {
+        EMPAuthProviderWithStorage.getInstance().logout();
         finish();
     }
 
