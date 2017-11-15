@@ -1,5 +1,5 @@
 ext {
-    libraryTag = 'r0.70.27'
+    libraryTag = 'r0.71.0'
     compileSdkVersion = 26
     buildToolsVersion = "26.0.1"
     supportLibVersion = "26.0.1"
