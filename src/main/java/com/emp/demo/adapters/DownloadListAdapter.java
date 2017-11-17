@@ -229,6 +229,25 @@ public class DownloadListAdapter extends BaseAdapter {
         }
         else if (item.getState() == DownloadItem.State.DOWNLOADING) {
             downloadStartUi(item, runnableStartDownload);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
+            assetTitleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
+            assetImageView.setClickable(true);
+            assetImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
         }
         else if (item.getState() == DownloadItem.State.PAUSED) {
             stateView.setText("");
@@ -239,6 +258,25 @@ public class DownloadListAdapter extends BaseAdapter {
             retryBtnView.setVisibility(View.GONE);
             assetSizeView.setVisibility(View.VISIBLE);
             progressView.setText(Integer.toString((int) Math.round(item.getProgress())) + " %");
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
+            assetTitleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
+            assetImageView.setClickable(true);
+            assetImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.playAsset(root, item.getDownloadedAsset());
+                }
+            });
         }
         else if (item.getState() == DownloadItem.State.QUEUED) {
             progressView.setVisibility(View.GONE);
