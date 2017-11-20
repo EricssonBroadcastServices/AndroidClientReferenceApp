@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.ericsson.emovs.exposure.entitlements.Entitlement;
 import net.ericsson.emovs.exposure.interfaces.IPlayable;
 import net.ericsson.emovs.exposure.models.EmpAsset;
 import net.ericsson.emovs.exposure.models.EmpImage;
@@ -24,6 +23,7 @@ import net.ericsson.emovs.download.DownloadItem;
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.download.interfaces.IDownload;
 import net.ericsson.emovs.download.interfaces.IDownloadEventListener;
+import net.ericsson.emovs.utilities.Entitlement;
 import net.ericsson.emovs.utilities.StorageMetrics;
 
 import java.util.ArrayList;

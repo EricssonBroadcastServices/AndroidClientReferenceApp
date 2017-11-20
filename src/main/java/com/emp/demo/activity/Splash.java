@@ -18,13 +18,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
-import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
 import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
-import com.emp.demo.app.AppController;
+
 import com.emp.demo.R;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import net.ericsson.emovs.utilities.DeviceInfo;
+import net.ericsson.emovs.utilities.Error;
 
 public class Splash extends Activity {
 
@@ -73,7 +73,7 @@ public class Splash extends Activity {
                 }
 
                 @Override
-                public void onAuthError(ExposureError error) {
+                public void onAuthError(Error error) {
                     splashLogoContainer.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_move_logo_up));
                     loginContainer.setVisibility(View.VISIBLE);
                     mProgressBar.setVisibility(View.INVISIBLE);
@@ -117,7 +117,7 @@ public class Splash extends Activity {
                             }
 
                             @Override
-                            public void onAuthError(ExposureError error) {
+                            public void onAuthError(Error error) {
                                 isLoading = false;
                                 loginContainer.setVisibility(View.VISIBLE);
                                 mProgressBar.setVisibility(View.INVISIBLE);

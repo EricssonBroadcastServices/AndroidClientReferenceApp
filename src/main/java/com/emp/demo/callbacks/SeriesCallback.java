@@ -2,10 +2,10 @@ package com.emp.demo.callbacks;
 
 import android.util.Log;
 
-import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
 import com.emp.demo.adapters.SeriesAdapter;
 import net.ericsson.emovs.exposure.models.EmpSeries;
+import net.ericsson.emovs.utilities.Error;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class SeriesCallback implements IMetadataCallback<ArrayList<EmpSeries>> {
     }
 
     @Override
-    public void onError(ExposureError error) {
+    public void onError(Error error) {
         Log.d(this.getClass().toString(), error.toString());
     }
 }

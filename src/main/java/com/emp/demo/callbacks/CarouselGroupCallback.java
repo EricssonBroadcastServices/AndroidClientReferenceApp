@@ -2,10 +2,10 @@ package com.emp.demo.callbacks;
 
 import android.util.Log;
 
-import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
 import com.emp.demo.adapters.CarouselGroupAdapter;
 import net.ericsson.emovs.exposure.models.EmpCarousel;
+import net.ericsson.emovs.utilities.Error;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class CarouselGroupCallback implements IMetadataCallback<ArrayList<EmpCar
     }
 
     @Override
-    public void onError(ExposureError error) {
+    public void onError(Error error) {
         Log.d(getClass().toString(), error.toString());
     }
 }

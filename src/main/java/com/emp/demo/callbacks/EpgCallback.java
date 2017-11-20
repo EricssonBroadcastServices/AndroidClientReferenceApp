@@ -3,9 +3,10 @@ package com.emp.demo.callbacks;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import net.ericsson.emovs.exposure.clients.exposure.ExposureError;
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
 import net.ericsson.emovs.exposure.models.EmpProgram;
+import net.ericsson.emovs.utilities.Error;
+
 import com.emp.demo.adapters.EpgCarouselAdapter;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class EpgCallback implements IMetadataCallback<ArrayList<EmpProgram>> {
     }
 
     @Override
-    public void onError(ExposureError error) {
+    public void onError(Error error) {
         Log.d(getClass().toString(), error.toString());
     }
 }
