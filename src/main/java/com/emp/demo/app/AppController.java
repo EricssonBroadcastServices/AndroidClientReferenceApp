@@ -44,11 +44,11 @@ public class AppController extends Application {
         EMPRegistry.bindApplicationContext(this);
         EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
 
-        try {
-            EMPDownloadProvider.getInstance().startService();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    EMPDownloadProvider.getInstance().startService();
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //}
     }
 
     public static synchronized AppController getInstance() {

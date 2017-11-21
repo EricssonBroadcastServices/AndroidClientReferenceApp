@@ -37,9 +37,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     if (project.hasProperty('hasParentProject')) {
         compile project(':libraries:playback')
+        compile project(':libraries:download-media')
     }
     else {
         compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
+        compile "com.github.EricssonBroadcastServices:AndroidClientDownload:${project.ext.libraryTag}"
     }
     compile 'com.android.support:appcompat-v7:26.0.1'
     compile 'com.android.support:design:26.0.1'
@@ -48,4 +50,6 @@ dependencies {
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'com.android.support:recyclerview-v7:25.0.+'
     testCompile 'junit:junit:4.12'
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
