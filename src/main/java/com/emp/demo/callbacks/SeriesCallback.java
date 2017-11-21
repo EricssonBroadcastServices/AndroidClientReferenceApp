@@ -4,8 +4,8 @@ import android.util.Log;
 
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
 import com.emp.demo.adapters.SeriesAdapter;
-import net.ericsson.emovs.exposure.models.EmpSeries;
-import net.ericsson.emovs.utilities.Error;
+import net.ericsson.emovs.utilities.models.EmpSeries;
+import net.ericsson.emovs.utilities.errors.Error;
 
 import java.util.ArrayList;
 

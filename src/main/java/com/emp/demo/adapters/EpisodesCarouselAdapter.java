@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.ericsson.emovs.exposure.models.EmpImage;
+import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
-import net.ericsson.emovs.exposure.models.EmpEpisode;
-import net.ericsson.emovs.exposure.models.EmpSeries;
+import net.ericsson.emovs.utilities.models.EmpEpisode;
+import net.ericsson.emovs.utilities.models.EmpSeries;
 import com.squareup.picasso.Picasso;
 
 /**

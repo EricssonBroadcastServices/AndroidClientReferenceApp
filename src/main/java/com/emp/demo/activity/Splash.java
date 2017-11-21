@@ -23,8 +23,8 @@ import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
 import com.emp.demo.R;
 import com.github.ybq.android.spinkit.style.Circle;
 
-import net.ericsson.emovs.utilities.DeviceInfo;
-import net.ericsson.emovs.utilities.Error;
+import net.ericsson.emovs.utilities.system.DeviceInfo;
+import net.ericsson.emovs.utilities.errors.Error;
 
 public class Splash extends Activity {
 

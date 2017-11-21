@@ -1,35 +1,27 @@
 package com.emp.demo.app;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 
-import net.ericsson.emovs.exposure.auth.EMPAuthProvider;
-import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
-import net.ericsson.emovs.exposure.models.EmpImage;
-import net.ericsson.emovs.exposure.models.LocalizedMetadata;
-import net.ericsson.emovs.utilities.ViewHelper;
-import com.emp.demo.R;
+import net.ericsson.emovs.utilities.models.EmpImage;
+import net.ericsson.emovs.utilities.models.LocalizedMetadata;
+import net.ericsson.emovs.utilities.ui.ViewHelper;
+
 import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
 // import com.squareup.leakcanary.LeakCanary;
 
-import net.ericsson.emovs.exposure.interfaces.IPlayable;
+import net.ericsson.emovs.utilities.interfaces.IPlayable;
 
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.playback.ui.views.OverlayPlayerView;
-import net.ericsson.emovs.utilities.EMPRegistry;
+import net.ericsson.emovs.utilities.emp.EMPRegistry;
 
 import java.util.ArrayList;
 

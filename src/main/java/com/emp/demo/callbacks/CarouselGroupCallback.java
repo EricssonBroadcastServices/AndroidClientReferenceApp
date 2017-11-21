@@ -4,8 +4,8 @@ import android.util.Log;
 
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
 import com.emp.demo.adapters.CarouselGroupAdapter;
-import net.ericsson.emovs.exposure.models.EmpCarousel;
-import net.ericsson.emovs.utilities.Error;
+import net.ericsson.emovs.utilities.models.EmpCarousel;
+import net.ericsson.emovs.utilities.errors.Error;
 
 import java.util.ArrayList;
 

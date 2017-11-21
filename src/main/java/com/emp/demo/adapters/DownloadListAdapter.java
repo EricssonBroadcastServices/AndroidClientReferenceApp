@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.ericsson.emovs.exposure.interfaces.IPlayable;
-import net.ericsson.emovs.exposure.models.EmpAsset;
-import net.ericsson.emovs.exposure.models.EmpImage;
+import net.ericsson.emovs.utilities.interfaces.IPlayable;
+import net.ericsson.emovs.utilities.models.EmpAsset;
+import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.app.AppController;
 import com.squareup.picasso.Picasso;
@@ -23,11 +23,10 @@ import net.ericsson.emovs.download.DownloadItem;
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.download.interfaces.IDownload;
 import net.ericsson.emovs.download.interfaces.IDownloadEventListener;
-import net.ericsson.emovs.utilities.Entitlement;
-import net.ericsson.emovs.utilities.StorageMetrics;
+import net.ericsson.emovs.utilities.entitlements.Entitlement;
+import net.ericsson.emovs.utilities.system.StorageMetrics;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 import static com.emp.demo.R.id.pauseBtn;

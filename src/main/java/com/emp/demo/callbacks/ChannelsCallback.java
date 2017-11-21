@@ -3,8 +3,8 @@ package com.emp.demo.callbacks;
 import android.util.Log;
 
 import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
-import net.ericsson.emovs.exposure.models.EmpChannel;
-import net.ericsson.emovs.utilities.Error;
+import net.ericsson.emovs.utilities.models.EmpChannel;
+import net.ericsson.emovs.utilities.errors.Error;
 
 import com.emp.demo.adapters.ChannelsAdapter;
 
