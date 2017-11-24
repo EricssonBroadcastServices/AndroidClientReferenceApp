@@ -36,7 +36,7 @@ public class SearchResults extends AppCompatActivity {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            EMPMetadataProvider.getInstance().autocomplete(query, new AutocompleteCallback(this.searchResultsAdapter));
+            EMPMetadataProvider.getInstance().autocomplete(query + "?locale=en", new AutocompleteCallback(this.searchResultsAdapter));
         }
     }
 
