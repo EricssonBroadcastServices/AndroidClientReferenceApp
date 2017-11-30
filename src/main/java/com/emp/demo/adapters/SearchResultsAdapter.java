@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
@@ -64,6 +66,20 @@ public class SearchResultsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
             AppController.playAsset(root, asset);
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //AppController.downloadAsset(root, asset);
+                try {
+                    EMPDownloadProvider.getInstance().add(asset);
+                    Toast.makeText(root.getApplicationContext(), "ASSET QUEUED FOR DOWNLOAD", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
             }
         });
 
