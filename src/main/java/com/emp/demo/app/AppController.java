@@ -43,12 +43,7 @@ public class AppController extends Application {
         mInstance = this;
         EMPRegistry.bindApplicationContext(this);
         EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
-
-        //try {
-        //    EMPDownloadProvider.getInstance().startService();
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //}
+        EMPDownloadProvider.getInstance().startService();
     }
 
     public static synchronized AppController getInstance() {

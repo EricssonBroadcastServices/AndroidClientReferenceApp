@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.ericsson.emovs.download.DownloadProperties;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.app.AppController;
@@ -115,7 +116,7 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
                 public boolean onLongClick(View view) {
                     //AppController.downloadAsset(root, asset);
                     try {
-                        EMPDownloadProvider.getInstance().add(asset);
+                        EMPDownloadProvider.getInstance().add(asset, DownloadProperties.DEFAULT);
                         Toast.makeText(root.getApplicationContext(), "ASSET QUEUED FOR DOWNLOAD", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
