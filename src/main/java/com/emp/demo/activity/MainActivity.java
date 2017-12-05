@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         loadSearchUi(menu);
 
         if (EMPRegistry.chromecastAppId() != null) {
-            CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, net.ericsson.emovs.playback.R.id.media_route_menu_item);
+            CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
         }
 
         return true;
