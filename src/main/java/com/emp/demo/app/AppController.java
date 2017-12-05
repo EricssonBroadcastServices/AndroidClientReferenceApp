@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import net.ericsson.emovs.cast.EMPCastProvider;
+import net.ericsson.emovs.cast.ui.activities.ExpandedControlsActivity;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.LocalizedMetadata;
 import net.ericsson.emovs.utilities.ui.ViewHelper;
@@ -42,6 +44,7 @@ public class AppController extends Application {
         //LeakCanary.install(this);
         mInstance = this;
         EMPRegistry.bindApplicationContext(this);
+        EMPRegistry.bindChromecastAppId("6AB327C1");
         EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
         EMPDownloadProvider.getInstance().startService();
     }
@@ -52,9 +55,21 @@ public class AppController extends Application {
 
 
     public static void playAsset(Context ctx, IPlayable playable) {
-        Intent intent = new Intent(ctx, MyVideoPlayer.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("playable", playable);
-        ctx.startActivity(intent);
+        if (EMPCastProvider.getInstance().getCastSession() == null) {
+            Intent intent = new Intent(ctx, MyVideoPlayer.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("playable", playable);
+            ctx.startActivity(intent);
+        }
+        else {
+            EMPCastProvider.getInstance().startCasting(playable);
+            Intent intent = new Intent(ctx, ExpandedControlsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ctx.startActivity(intent);
+        }
     }
 
     public static void playOverlayAsset(Activity activity, IPlayable playable) {

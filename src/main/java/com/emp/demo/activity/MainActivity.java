@@ -26,8 +26,10 @@ import com.emp.demo.app.AppController;
 import com.emp.demo.fragments.FragmentDrawer;
 import com.emp.demo.R;
 import com.emp.demo.adapters.PagerAdapter;
+import com.google.android.gms.cast.framework.CastButtonFactory;
 
 import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
+import net.ericsson.emovs.utilities.emp.EMPRegistry;
 
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -92,6 +94,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         loadSearchUi(menu);
+
+        if (EMPRegistry.chromecastAppId() != null) {
+            CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, net.ericsson.emovs.playback.R.id.media_route_menu_item);
+        }
+
         return true;
     }
 
