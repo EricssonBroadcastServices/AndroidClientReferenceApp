@@ -54,21 +54,25 @@ public class AppController extends Application {
     }
 
 
-    public static void playAsset(Context ctx, IPlayable playable) {
+    public static void playAsset(final Context ctx, IPlayable playable) {
         if (EMPCastProvider.getInstance().getCastSession() == null) {
             Intent intent = new Intent(ctx, MyVideoPlayer.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("playable", playable);
             ctx.startActivity(intent);
         }
         else {
-            EMPCastProvider.getInstance().startCasting(playable);
-            Intent intent = new Intent(ctx, ExpandedControlsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            ctx.startActivity(intent);
+            EMPCastProvider.getInstance().startCasting(playable, new Runnable() {
+                boolean invalidated = false;
+                @Override
+                public void run() {
+                    if(invalidated) {
+                        return;
+                    }
+                    invalidated = true;
+                    Intent intent = new Intent(ctx, ExpandedControlsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ctx.startActivity(intent);
+                }
+            });
         }
     }
 
