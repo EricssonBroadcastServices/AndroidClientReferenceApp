@@ -10,7 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import net.ericsson.emovs.cast.EMPCastProvider;
-import net.ericsson.emovs.cast.ui.activities.ExpandedControlsActivity;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.LocalizedMetadata;
 import net.ericsson.emovs.utilities.ui.ViewHelper;
@@ -56,12 +55,13 @@ public class AppController extends Application {
 
 
     public static void playAsset(final Context ctx, IPlayable playable) {
-        if (EMPCastProvider.getInstance().getCastSession() == null) {
+        if (EMPCastProvider.getInstance().getCurrentCastSession() == null) {
             Intent intent = new Intent(ctx, MyVideoPlayer.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("playable", playable);
             ctx.startActivity(intent);
         }
         else {
+            // TODO: make this runnable solution easier for customer dev
             EMPCastProvider.getInstance().startCasting(playable, new Runnable() {
                 boolean invalidated = false;
                 @Override
@@ -70,8 +70,7 @@ public class AppController extends Application {
                         return;
                     }
                     invalidated = true;
-                    Intent intent = new Intent(ctx, ExpandedControlsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    ctx.startActivity(intent);
+                    EMPCastProvider.getInstance().showExpandedControls();
                 }
             });
         }
