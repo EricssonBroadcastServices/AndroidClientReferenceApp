@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.ericsson.emovs.download.DownloadProperties;
 import net.ericsson.emovs.download.EMPDownloadProvider;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import com.emp.demo.app.AppController;
@@ -74,7 +75,13 @@ public class SearchResultsAdapter extends BaseAdapter {
             public boolean onLongClick(View view) {
                 //AppController.downloadAsset(root, asset);
                 try {
-                    EMPDownloadProvider.getInstance().add(asset);
+                    //ArrayList<String> selectedTracks = new ArrayList<>();
+                    //selectedTracks.add("sv");
+                    //selectedTracks.add("en");
+                    //ArrayList<String> selectedTextTracks = new ArrayList<>();
+                    //selectedTextTracks.add("fr");
+                    //EMPDownloadProvider.getInstance().add(asset, DownloadProperties.DEFAULT.withSelectedAudioLanguages(selectedTracks).withSelectedTextLanguages(selectedTextTracks));
+                    EMPDownloadProvider.getInstance().add(asset, DownloadProperties.DEFAULT);
                     Toast.makeText(root.getApplicationContext(), "ASSET QUEUED FOR DOWNLOAD", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
