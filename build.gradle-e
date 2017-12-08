@@ -1,5 +1,5 @@
 ext {
-    libraryTag = 'r0.73.997'
+    libraryTag = 'master-SNAPSHOT'
     compileSdkVersion = 26
     buildToolsVersion = "26.0.1"
     supportLibVersion = "26.0.1"
