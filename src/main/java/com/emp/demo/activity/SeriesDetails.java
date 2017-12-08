@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpisodesCarouselAdapter;
+import com.emp.demo.app.AppController;
+
 import net.ericsson.emovs.utilities.models.EmpSeries;
 
 public class SeriesDetails extends AppCompatActivity {
@@ -38,6 +41,13 @@ public class SeriesDetails extends AppCompatActivity {
         if(series.episodes == null) {
             // TODO: get programs for a specific series && seasonID
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        AppController.loadActionBarMenu(this, menu);
+        return true;
     }
 
     void loadActionBar(String title) {

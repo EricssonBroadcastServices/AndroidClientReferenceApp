@@ -19,5 +19,7 @@
             android:layout_below="@+id/toolbar"
             android:layout_gravity="top" />
 
+        <include layout="@layout/chromecast_mini_controller" />
     </RelativeLayout>
+
 </LinearLayout>

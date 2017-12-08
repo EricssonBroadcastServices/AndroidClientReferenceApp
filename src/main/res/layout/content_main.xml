@@ -45,6 +45,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_below="@id/tab_layout"/>
+
+        <include layout="@layout/chromecast_mini_controller" />
     </LinearLayout>
 
     <fragment
@@ -55,7 +57,5 @@
         android:layout_gravity="start"
         app:layout="@layout/fragment_navigation_drawer"
         tools:layout="@layout/fragment_navigation_drawer" />
-
-
 
 </android.support.v4.widget.DrawerLayout>

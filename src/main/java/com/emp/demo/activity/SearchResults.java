@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
 import com.emp.demo.R;
 import com.emp.demo.adapters.SearchResultsAdapter;
+import com.emp.demo.app.AppController;
 import com.emp.demo.callbacks.AutocompleteCallback;
 
 public class SearchResults extends AppCompatActivity {
@@ -38,6 +40,13 @@ public class SearchResults extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             EMPMetadataProvider.getInstance().autocomplete(query + "?locale=en", new AutocompleteCallback(this.searchResultsAdapter));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        AppController.loadActionBarMenu(this, menu);
+        return true;
     }
 
 

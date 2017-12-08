@@ -28,15 +28,10 @@
                 android:layout_below="@+id/toolbar"
                 android:id="@+id/search_results_list" />
 
-                <!--<TextView
-                android:id="@+id/NomatchFound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="No Data Found"
-                android:textSize="30dp" />-->
+            <include layout="@layout/chromecast_mini_controller" />
 
         </RelativeLayout>
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

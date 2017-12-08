@@ -93,12 +93,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        loadSearchUi(menu);
-
-        if (EMPRegistry.chromecastAppId() != null) {
-            CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
-        }
-
+        AppController.loadActionBarMenu(this, menu);
         return true;
     }
 
@@ -211,55 +206,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
-    private void loadSearchUi(Menu menu) {
-        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final MenuItem searchMenuItem = menu.findItem(R.id.search);
-        final SearchView searchView = (SearchView) searchMenuItem.getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(true);
-        searchView.setQueryHint(getString(R.string.search_hint));
-        searchView.setIconified(false);
-        searchView.clearFocus();
-        MenuItemCompat.setOnActionExpandListener(searchMenuItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                searchView.requestFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                return true;
-            }
 
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                searchView.setQuery("", false);
-                searchView.clearFocus();
-                return true;
-            }
-        });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                searchMenuItem.collapseActionView();
-                return true;
-            }
-        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchMenuItem.collapseActionView();
-                Intent intent = new Intent(getApplicationContext(), SearchResults.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setAction(Intent.ACTION_SEARCH);
-                intent.putExtra(SearchManager.QUERY, query);
-                startActivity(intent);
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
-    }
 }
 
 

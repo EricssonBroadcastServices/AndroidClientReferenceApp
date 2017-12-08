@@ -3,19 +3,29 @@ package com.emp.demo.app;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 
 import net.ericsson.emovs.cast.EMPCastProvider;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.LocalizedMetadata;
 import net.ericsson.emovs.utilities.ui.ViewHelper;
 
+import com.emp.demo.R;
 import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
+import com.emp.demo.activity.SearchResults;
+import com.google.android.gms.cast.framework.CastButtonFactory;
 // import com.squareup.leakcanary.LeakCanary;
 
 import net.ericsson.emovs.utilities.interfaces.IPlayable;
@@ -61,18 +71,7 @@ public class AppController extends Application {
             ctx.startActivity(intent);
         }
         else {
-            // TODO: make this runnable solution easier for customer dev
-            EMPCastProvider.getInstance().startCasting(playable, new Runnable() {
-                boolean invalidated = false;
-                @Override
-                public void run() {
-                    if(invalidated) {
-                        return;
-                    }
-                    invalidated = true;
-                    EMPCastProvider.getInstance().showExpandedControls();
-                }
-            });
+            EMPCastProvider.getInstance().startCasting(playable, null);
         }
     }
 
@@ -127,5 +126,63 @@ public class AppController extends Application {
             image = metadata.getImage("en", EmpImage.Orientation.LANDSCAPE);
         }
         return image;
+    }
+
+
+    public static void loadActionBarMenu(Activity activity, Menu menu) {
+        loadSearchUi(activity, menu);
+
+        if (EMPRegistry.chromecastAppId() != null) {
+            CastButtonFactory.setUpMediaRouteButton(activity.getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
+        }
+    }
+
+    public static void loadSearchUi(final Activity activity, Menu menu) {
+        final SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
+        final MenuItem searchMenuItem = menu.findItem(R.id.search);
+        final SearchView searchView = (SearchView) searchMenuItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
+        searchView.setIconifiedByDefault(true);
+        searchView.setQueryHint(activity.getString(R.string.search_hint));
+        searchView.setIconified(false);
+        searchView.clearFocus();
+        MenuItemCompat.setOnActionExpandListener(searchMenuItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                searchView.requestFocus();
+                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                searchView.setQuery("", false);
+                searchView.clearFocus();
+                return true;
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchMenuItem.collapseActionView();
+                return true;
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchMenuItem.collapseActionView();
+                Intent intent = new Intent(activity.getApplicationContext(), SearchResults.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setAction(Intent.ACTION_SEARCH);
+                intent.putExtra(SearchManager.QUERY, query);
+                activity.startActivity(intent);
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 }

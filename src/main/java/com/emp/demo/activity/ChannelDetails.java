@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
@@ -13,6 +14,7 @@ import net.ericsson.emovs.exposure.metadata.queries.EpgQueryParameters;
 import net.ericsson.emovs.utilities.models.EmpChannel;
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpgCarouselAdapter;
+import com.emp.demo.app.AppController;
 import com.emp.demo.callbacks.EpgCallback;
 
 public class ChannelDetails extends AppCompatActivity {
@@ -76,6 +78,13 @@ public class ChannelDetails extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        AppController.loadActionBarMenu(this, menu);
+        return true;
     }
 
 }

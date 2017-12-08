@@ -4,11 +4,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.emp.demo.R;
 import com.emp.demo.adapters.DownloadListAdapter;
+import com.emp.demo.app.AppController;
+import com.emp.demo.fragments.FragmentDrawer;
 
 import net.ericsson.emovs.download.DownloadItem;
 import net.ericsson.emovs.download.EMPDownloadProvider;
@@ -62,6 +66,13 @@ public class MyDownloads extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setTitle(title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        AppController.loadActionBarMenu(this, menu);
+        return true;
     }
 
 
