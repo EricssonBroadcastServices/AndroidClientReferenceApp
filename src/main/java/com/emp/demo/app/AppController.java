@@ -71,7 +71,7 @@ public class AppController extends Application {
             ctx.startActivity(intent);
         }
         else {
-            EMPCastProvider.getInstance().startCasting(playable, null);
+            EMPCastProvider.getInstance().startCasting(playable, null, null, null);
         }
     }
 
