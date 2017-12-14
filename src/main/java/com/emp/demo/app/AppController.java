@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
 import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
