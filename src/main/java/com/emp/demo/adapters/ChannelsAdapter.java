@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpChannel;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.R;
@@ -84,6 +85,16 @@ public class ChannelsAdapter extends BaseAdapter {
                 Intent intent = new Intent(root, ChannelDetails.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("channel", channel);
                 root.startActivity(intent);
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                EmpAsset asset = new EmpAsset();
+                asset.assetId = ((EmpChannel) channel).channelId;
+                AppController.playAsset(root, asset);
+                return true;
             }
         });
 
