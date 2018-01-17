@@ -1,26 +1,15 @@
 package com.emp.demo.activity;
 
-import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.emp.demo.R;
 
 import net.ericsson.emovs.playback.EMPPlayer;
 import net.ericsson.emovs.playback.EmptyPlaybackEventListener;
 import net.ericsson.emovs.playback.PlaybackProperties;
-import net.ericsson.emovs.playback.interfaces.ControllerVisibility;
 import net.ericsson.emovs.playback.ui.activities.SimplePlaybackActivity;
-import net.ericsson.emovs.playback.ui.adapters.LanguageAdapter;
 import net.ericsson.emovs.playback.ui.views.EMPPlayerView;
-import net.ericsson.emovs.utilities.emp.EMPRegistry;
 import net.ericsson.emovs.utilities.system.RunnableThread;
 
 public class MyVideoPlayer extends SimplePlaybackActivity {
