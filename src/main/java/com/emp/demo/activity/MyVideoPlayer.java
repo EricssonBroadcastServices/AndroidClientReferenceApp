@@ -8,9 +8,16 @@ import com.emp.demo.R;
 import net.ericsson.emovs.playback.EMPPlayer;
 import net.ericsson.emovs.playback.EmptyPlaybackEventListener;
 import net.ericsson.emovs.playback.PlaybackProperties;
+import net.ericsson.emovs.playback.Player;
 import net.ericsson.emovs.playback.ui.activities.SimplePlaybackActivity;
 import net.ericsson.emovs.playback.ui.views.EMPPlayerView;
 import net.ericsson.emovs.utilities.system.RunnableThread;
+
+import org.joda.time.DateTime;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MyVideoPlayer extends SimplePlaybackActivity {
 
@@ -59,15 +66,25 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        playheadTime.setText("PlayheadTime: " + player.getPlayheadTime());
-                                        timeRange.setText("SeekTimeRange = [ " + timeRangeV[0] + ", " + timeRangeV[1] + " ]");
-                                        bufferedTimeRange.setText("BufferedTimeRange = [ " + bufTimeRangeV[0] + ", " + bufTimeRangeV[1] + " ]");
+                                        DateTime playheadDT = new DateTime(player.getPlayheadTime());
+                                        playheadTime.setText("PlayheadTime: " + playheadDT.toLocalTime());
+                                        timeRange.setText("SeekTimeRange = [ " + new DateTime(timeRangeV[0]).toLocalTime() + ", " + new DateTime(timeRangeV[1]).toLocalTime() + " ]");
+                                        bufferedTimeRange.setText("BufferedTimeRange = [ " + new DateTime(bufTimeRangeV[0]).toLocalTime() + ", " + new DateTime(bufTimeRangeV[1]).toLocalTime() + " ]");
 
                                         playheadPosition.setText("PlayheadPosition: " + player.getPlayheadPosition());
                                         seekRange.setText("SeekRange = [ " + seekRangeV[0] + ", " + seekRangeV[1] + " ]");
                                         bufferedRange.setText("BufferedRange = [ " + bufRangeV[0] + ", " + bufRangeV[1] + " ]");
 
-                                        timeshiftDelay.setText("TimeshiftDelay: " + player.getTimehisftDelay());
+                                        Method field = null;
+                                        try {
+                                            field = ((Player)player).getClass().getSuperclass().getDeclaredMethod("getTimehisftDelay");
+                                            field.setAccessible(true);
+                                            long timeshiftVal = (Long) field.invoke(player);
+                                            timeshiftDelay.setText("TimeshiftDelay: " + timeshiftVal);
+                                        }
+                                        catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+                                            e.printStackTrace();
+                                        }
                                         currentProgram.setText("CurrentProgram: " + (player.getCurrentProgram() != null ? player.getCurrentProgram().programId : "N/A"));
                                     }
                                 });
