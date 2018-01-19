@@ -107,7 +107,7 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
                 @Override
                 public void onClick(View view) {
                     //AppController.playOverlayAsset(root, asset);
-                    AppController.playAsset(root, asset);
+                    AppController.playAsset(root, asset, null);
                 }
             });
 

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import net.ericsson.emovs.cast.EMPCastProvider;
+import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.LocalizedMetadata;
 import net.ericsson.emovs.utilities.ui.ViewHelper;
@@ -63,10 +64,13 @@ public class AppController extends Application {
     }
 
 
-    public static void playAsset(final Context ctx, IPlayable playable) {
+    public static void playAsset(final Context ctx, IPlayable playable, PlaybackProperties properties) {
         if (EMPCastProvider.getInstance().getCurrentCastSession() == null) {
             Intent intent = new Intent(ctx, MyVideoPlayer.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("playable", playable);
+            if (properties != null) {
+                intent.putExtra("properties", properties);
+            }
             ctx.startActivity(intent);
         }
         else {

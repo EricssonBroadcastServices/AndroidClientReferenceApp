@@ -66,7 +66,7 @@ public class SearchResultsAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            AppController.playAsset(root, asset);
+            AppController.playAsset(root, asset, null);
             }
         });
 

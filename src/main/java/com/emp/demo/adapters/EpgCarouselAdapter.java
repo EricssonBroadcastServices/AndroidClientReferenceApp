@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.utilities.models.EmpChannel;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.EmpProgram;
@@ -119,7 +120,14 @@ public class EpgCarouselAdapter extends RecyclerView.Adapter<EpgCarouselAdapter.
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, asset);
+                    AppController.playAsset(root, asset, null);
+                }
+            });
+            this.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AppController.playAsset(root, asset, new PlaybackProperties().withPlayFrom(PlaybackProperties.PlayFrom.BOOKMARK));
+                    return false;
                 }
             });
             if(asset.isFuture()) {

@@ -91,9 +91,10 @@ public class ChannelsAdapter extends BaseAdapter {
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                EmpAsset asset = new EmpAsset();
-                asset.assetId = ((EmpChannel) channel).channelId;
-                AppController.playAsset(root, asset);
+                //EmpAsset asset = new EmpAsset();
+                //asset.assetId = ((EmpChannel) channel).channelId;
+                //AppController.playAsset(root, asset);
+                AppController.playAsset(root, channel, null);
                 return true;
             }
         });

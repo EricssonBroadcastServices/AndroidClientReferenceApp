@@ -199,21 +199,21 @@ public class DownloadListAdapter extends BaseAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetTitleView.setClickable(true);
             assetTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetImageView.setClickable(true);
             assetImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
         }
@@ -231,20 +231,20 @@ public class DownloadListAdapter extends BaseAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetImageView.setClickable(true);
             assetImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
         }
@@ -260,20 +260,20 @@ public class DownloadListAdapter extends BaseAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
             assetImageView.setClickable(true);
             assetImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppController.playAsset(root, item.getDownloadedAsset());
+                    AppController.playAsset(root, item.getDownloadedAsset(), null);
                 }
             });
         }
@@ -393,21 +393,21 @@ public class DownloadListAdapter extends BaseAdapter {
                         finalView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                AppController.playAsset(root, item.getDownloadedAsset());
+                                AppController.playAsset(root, item.getDownloadedAsset(), null);
                             }
                         });
                         assetTitleView.setClickable(true);
                         assetTitleView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                AppController.playAsset(root, item.getDownloadedAsset());
+                                AppController.playAsset(root, item.getDownloadedAsset(), null);
                             }
                         });
                         assetImageView.setClickable(true);
                         assetImageView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                AppController.playAsset(root, item.getDownloadedAsset());
+                                AppController.playAsset(root, item.getDownloadedAsset(), null);
                             }
                         });
                     }
