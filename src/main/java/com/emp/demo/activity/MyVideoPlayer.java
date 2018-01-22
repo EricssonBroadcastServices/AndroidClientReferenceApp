@@ -1,6 +1,7 @@
 package com.emp.demo.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.emp.demo.R;
@@ -52,6 +53,10 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
             final TextView currentProgram = findViewById(R.id.currentProgram);
             view.getPlayer().addListener(new EmptyPlaybackEventListener(view.getPlayer()) {
                 @Override
+                public void onStop() {
+                    findViewById(R.id.testControls).setVisibility(View.INVISIBLE);
+                }
+                @Override
                 public void onPlaying() {
                     if (testControlsThread != null && testControlsThread.isInterrupted() == false) {
                         testControlsThread.interrupt();
@@ -60,7 +65,7 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                     testControlsThread = new RunnableThread(new Runnable() {
                         @Override
                         public void run() {
-                            for (;;) {
+                            for (int i = 0;; i++) {
                                 final EMPPlayer player = view.getPlayer();
                                 final long[] timeRangeV = player.getSeekTimeRange();
                                 final long[] bufTimeRangeV = player.getBufferedTimeRange();
@@ -69,9 +74,13 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                                 if(timeRangeV == null || bufTimeRangeV == null || bufRangeV == null || seekRangeV == null) {
                                     break;
                                 }
+                                final int j = i;
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        if (j == 0) {
+                                            findViewById(R.id.testControls).setVisibility(View.VISIBLE);
+                                        }
                                         DateTime playheadDT = new DateTime(player.getPlayheadTime());
                                         playheadTime.setText("PlayheadTime: " + playheadDT.toLocalTime());
                                         timeRange.setText("SeekTimeRange = [ " + new DateTime(timeRangeV[0]).toLocalTime() + ", " + new DateTime(timeRangeV[1]).toLocalTime() + " ]");
