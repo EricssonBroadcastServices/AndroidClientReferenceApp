@@ -21,6 +21,8 @@ import java.lang.reflect.Method;
 
 public class MyVideoPlayer extends SimplePlaybackActivity {
 
+    RunnableThread testControlsThread;
+
     public MyVideoPlayer() {
         super(PlaybackProperties.DEFAULT);
     }
@@ -51,7 +53,11 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
             view.getPlayer().addListener(new EmptyPlaybackEventListener(view.getPlayer()) {
                 @Override
                 public void onPlaying() {
-                    new RunnableThread(new Runnable() {
+                    if (testControlsThread != null && testControlsThread.isInterrupted() == false) {
+                        testControlsThread.interrupt();
+                        testControlsThread = null;
+                    }
+                    testControlsThread = new RunnableThread(new Runnable() {
                         @Override
                         public void run() {
                             for (;;) {
@@ -95,7 +101,8 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                                 }
                             }
                         }
-                    }).start();
+                    });
+                    testControlsThread.start();
                 }
             });
         }
