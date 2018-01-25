@@ -62,6 +62,10 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                         testControlsThread.interrupt();
                         testControlsThread = null;
                     }
+                    if (player.getEntitlement() == null || player.getEntitlement().mediaLocator.contains(".isml") == false) {
+                        findViewById(R.id.testControls).setVisibility(View.GONE);
+                        return;
+                    }
                     testControlsThread = new RunnableThread(new Runnable() {
                         @Override
                         public void run() {
