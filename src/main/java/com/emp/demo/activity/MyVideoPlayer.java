@@ -10,13 +10,13 @@ import net.ericsson.emovs.playback.EMPPlayer;
 import net.ericsson.emovs.playback.EmptyPlaybackEventListener;
 import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.playback.Player;
+import net.ericsson.emovs.utilities.emp.UniversalPackagerHelper;
 import net.ericsson.emovs.playback.ui.activities.SimplePlaybackActivity;
 import net.ericsson.emovs.playback.ui.views.EMPPlayerView;
 import net.ericsson.emovs.utilities.system.RunnableThread;
 
 import org.joda.time.DateTime;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -62,7 +62,7 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
                         testControlsThread.interrupt();
                         testControlsThread = null;
                     }
-                    if (player.getEntitlement() == null || player.getEntitlement().mediaLocator.contains(".isml") == false) {
+                    if (player.getEntitlement() == null || UniversalPackagerHelper.isUniversalPackager(player.getEntitlement().mediaLocator) == false) {
                         findViewById(R.id.testControls).setVisibility(View.GONE);
                         return;
                     }
