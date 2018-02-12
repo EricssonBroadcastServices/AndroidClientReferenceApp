@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
-import net.ericsson.emovs.exposure.metadata.queries.EpgQueryParameters;
+import net.ericsson.emovs.utilities.queries.EpgQueryParameters;
 import net.ericsson.emovs.utilities.models.EmpChannel;
 import com.emp.demo.R;
 import com.emp.demo.adapters.EpgCarouselAdapter;

@@ -3,7 +3,7 @@ package com.emp.demo.callbacks;
 import android.util.Log;
 
 
-import net.ericsson.emovs.exposure.metadata.IMetadataCallback;
+import net.ericsson.emovs.utilities.interfaces.IMetadataCallback;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.errors.Error;
 

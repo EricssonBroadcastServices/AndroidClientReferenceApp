@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
-import net.ericsson.emovs.exposure.metadata.queries.ChannelsQueryParameters;
+import net.ericsson.emovs.utilities.queries.ChannelsQueryParameters;
 import com.emp.demo.R;
 import com.emp.demo.adapters.ChannelsAdapter;
 import com.emp.demo.callbacks.ChannelsCallback;
