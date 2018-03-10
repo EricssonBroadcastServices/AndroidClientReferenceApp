@@ -52,8 +52,9 @@ public class AppController extends Application {
         //}
         //LeakCanary.install(this);
         mInstance = this;
+
         EMPRegistry.bindApplicationContext(this);
-        EMPRegistry.bindChromecastAppId("6AB327C1");
+        EMPRegistry.bindChromecastAppId("BFE63AE4");
         EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
         EMPRegistry.bindLocale("en");
         EMPDownloadProvider.getInstance().startService();
