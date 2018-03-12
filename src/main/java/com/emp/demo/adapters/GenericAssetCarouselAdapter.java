@@ -16,6 +16,7 @@ import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.emp.demo.interfaces.IAssetCarouselAdapter;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import net.ericsson.emovs.download.EMPDownloadProvider;
@@ -98,10 +99,10 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
             //dayRefView.setText(asset.timeHumanRefernce(EmpProgram.DateRef.START));
             EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
-                Picasso.with(root.getApplicationContext()).load(image.url).into(imageView);
+                AppController.PICASSO.load(image.url).into(imageView);
             }
             else {
-                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(imageView);
+                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

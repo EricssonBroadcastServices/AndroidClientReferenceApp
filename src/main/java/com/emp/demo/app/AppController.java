@@ -26,6 +26,9 @@ import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
 import com.emp.demo.activity.SearchResults;
 import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 // import com.squareup.leakcanary.LeakCanary;
 
 import net.ericsson.emovs.utilities.interfaces.IPlayable;
@@ -41,10 +44,13 @@ public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
 
     private static AppController mInstance;
+    public static Picasso PICASSO;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        PICASSO = new Picasso.Builder(getApplicationContext()).memoryCache(new LruCache(24000)).build();
+
         //if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

@@ -17,6 +17,7 @@ import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.app.AppController;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import net.ericsson.emovs.download.DownloadItem;
@@ -179,10 +180,10 @@ public class DownloadListAdapter extends BaseAdapter {
             assetTitleView.setText(asset.originalTitle);
             EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
-                Picasso.with(root.getApplicationContext()).load(image.url).fit().into(assetImageView);
+                AppController.PICASSO.load(image.url).fit().into(assetImageView);
             }
             else {
-                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(assetImageView);
+                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(assetImageView);
             }
         }
 

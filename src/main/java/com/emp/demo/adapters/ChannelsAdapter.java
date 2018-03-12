@@ -16,6 +16,7 @@ import net.ericsson.emovs.utilities.models.EmpImage;
 import com.emp.demo.R;
 import com.emp.demo.activity.ChannelDetails;
 import com.emp.demo.app.AppController;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -73,10 +74,10 @@ public class ChannelsAdapter extends BaseAdapter {
         channelNameView.setText(channel.localized.getTitle("en"));
         EmpImage image = AppController.getImage(channel.localized);
         if (image != null && image.url != null) {
-            Picasso.with(root.getApplicationContext()).load(image.url).into(channelLogoView);
+            AppController.PICASSO.load(image.url).into(channelLogoView);
         }
         else {
-            Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(channelLogoView);
+            AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(channelLogoView);
         }
 
         view.setOnClickListener(new View.OnClickListener() {

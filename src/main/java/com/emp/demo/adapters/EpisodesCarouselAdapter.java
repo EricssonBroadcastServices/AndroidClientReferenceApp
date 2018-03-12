@@ -14,6 +14,8 @@ import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import net.ericsson.emovs.utilities.models.EmpEpisode;
 import net.ericsson.emovs.utilities.models.EmpSeries;
+
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -106,10 +108,10 @@ public class EpisodesCarouselAdapter extends RecyclerView.Adapter<EpisodesCarous
             episodeNumberView.setText("Episode " + asset.episodeNr);
             EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
-                Picasso.with(root.getApplicationContext()).load(image.url).into(imageView);
+                AppController.PICASSO.load(image.url).into(imageView);
             }
             else {
-                Picasso.with(root.getApplicationContext()).load(R.drawable.noimage_thumbnail).into(imageView);
+                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
