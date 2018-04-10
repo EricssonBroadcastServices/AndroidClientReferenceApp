@@ -60,7 +60,7 @@ public class AppController extends Application {
         mInstance = this;
 
         EMPRegistry.bindApplicationContext(this);
-        EMPRegistry.bindChromecastAppId("BFE63AE4");
+        EMPRegistry.bindChromecastAppId("E5A43176");
         EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
         EMPRegistry.bindLocale("en");
         EMPDownloadProvider.getInstance().startService();
