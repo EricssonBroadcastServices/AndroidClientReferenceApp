@@ -41,7 +41,7 @@ public class ChannelDetails extends AppCompatActivity {
         epgCarousel.setLayoutManager(layoutManager);
 
         if(channel.programs == null) {
-            EMPMetadataProvider.getInstance().getEpg(channel.channelId, new EpgCallback(epgCarousel), EpgQueryParameters.DEFAULT);
+            EMPMetadataProvider.getInstance().getEpg(channel.channelId, new EpgCallback(epgCarousel), EpgQueryParameters.DEFAULT.clone());
         }
     }
 
