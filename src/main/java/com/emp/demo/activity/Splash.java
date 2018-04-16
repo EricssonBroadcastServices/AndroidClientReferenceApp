@@ -16,15 +16,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
 import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
 
 import com.emp.demo.R;
+import com.emp.demo.app.AppController;
+import com.emp.demo.app.Constants;
 import com.github.ybq.android.spinkit.style.Circle;
 
+import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
+import net.ericsson.emovs.utilities.emp.EMPRegistry;
+import net.ericsson.emovs.utilities.interfaces.IMetadataCallback;
+import net.ericsson.emovs.utilities.models.EmpCustomer;
 import net.ericsson.emovs.utilities.system.DeviceInfo;
 import net.ericsson.emovs.utilities.errors.Error;
+
+import java.util.Calendar;
 
 public class Splash extends Activity {
 
@@ -50,10 +59,35 @@ public class Splash extends Activity {
         this.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.setContentView(R.layout.activity_splash);
+
+        extractIntentProps();
+
         this.mProgressBar = (ProgressBar)findViewById(R.id.spin_kit);
         Circle doubleBounce = new Circle();
         mProgressBar.setIndeterminateDrawable(doubleBounce);
         mImgLogo = (ImageView) findViewById(R.id.img_logo);
+
+        EMPMetadataProvider.getInstance().getMainJson(new IMetadataCallback<EmpCustomer>() {
+            @Override
+            public void onMetadata(EmpCustomer metadata) {
+                final String logoUrl = metadata.getLogoUrl();
+                final String serviceName = metadata.getServiceName();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppController.PICASSO.load(logoUrl).into(mImgLogo);
+                        TextView copyright = findViewById(R.id.tv_copyright);
+                        int year = Calendar.getInstance().get(Calendar.YEAR);
+                        copyright.setText("©" + year + " " + serviceName);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Error error) {
+                Toast.makeText(getApplicationContext(), "App logo not found.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final LinearLayout splashLogoContainer = (LinearLayout) findViewById(R.id.splash_logo_spinner_layout);
         final LinearLayout loginContainer = (LinearLayout) findViewById(R.id.splash_login_form);
@@ -170,6 +204,32 @@ public class Splash extends Activity {
     }
 
 
+    private void extractIntentProps() {
+        Intent intent = getIntent();
+        if (intent != null && intent.getAction().equals("com.emp.demo.launchfrombrowser")){
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                if (bundle.containsKey("CU")) {
+                    String customerId = bundle.getString("CU");
+                    Constants.CUSTOMER = customerId;
+                }
+                if (bundle.containsKey("BU")) {
+                    String businessUnitId = bundle.getString("BU");
+                    Constants.BUSSINESS_UNIT = businessUnitId;
+                }
+                if (bundle.containsKey("ENV")) {
+                    String env = bundle.getString("ENV");
+                    if ("DEV".equals(env)) {
+                        Constants.API_URL = Constants.API_URL_DEV;
+                    }
+                    else if ("PROD".equals(env)) {
+                        Constants.API_URL = Constants.API_URL_PROD;
+                    }
+                }
+                EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+            }
+        }
+    }
 
 }
 
