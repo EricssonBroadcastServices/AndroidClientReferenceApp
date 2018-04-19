@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import net.ericsson.emovs.cast.EMPCastProvider;
+import net.ericsson.emovs.exposure.auth.SharedPropertiesICredentialsStorage;
 import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.utilities.models.EmpImage;
 import net.ericsson.emovs.utilities.models.LocalizedMetadata;
@@ -61,7 +62,7 @@ public class AppController extends Application {
 
         EMPRegistry.bindApplicationContext(this);
         EMPRegistry.bindChromecastAppId("E5A43176");
-        EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+        bindExposureContext();
         EMPRegistry.bindLocale("en");
         EMPDownloadProvider.getInstance().startService();
     }
@@ -70,6 +71,17 @@ public class AppController extends Application {
         return mInstance;
     }
 
+    public void bindExposureContext() {
+        SharedPropertiesICredentialsStorage store = SharedPropertiesICredentialsStorage.getInstance();
+
+        if (!store.getCustomer().isEmpty() && !store.getBusinessUnit().isEmpty() && !store.getExposureUrl().isEmpty()) {
+            Constants.API_URL = store.getExposureUrl();
+            Constants.CUSTOMER = store.getCustomer();
+            Constants.BUSSINESS_UNIT = store.getBusinessUnit();
+        }
+
+        EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+    }
 
     public static void playAsset(final Context ctx, IPlayable playable, PlaybackProperties properties) {
         if (EMPCastProvider.getInstance().getCurrentCastSession() == null) {
