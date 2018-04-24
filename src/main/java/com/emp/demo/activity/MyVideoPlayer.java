@@ -26,7 +26,7 @@ public class MyVideoPlayer extends SimplePlaybackActivity {
     RunnableThread testControlsThread;
 
     public MyVideoPlayer() {
-        super(PlaybackProperties.DEFAULT.withNativeControlsHideOnTouch(false).withNativeControlsShowTimeoutMs(0));
+        super(Constants.TEST_MODE != null ? PlaybackProperties.DEFAULT.withNativeControlsHideOnTouch(false).withNativeControlsShowTimeoutMs(0) : PlaybackProperties.DEFAULT.withNativeControlsShowTimeoutMs(2000));
     }
 
     @Override
