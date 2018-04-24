@@ -226,6 +226,12 @@ public class Splash extends Activity {
                         Constants.API_URL = Constants.API_URL_PROD;
                     }
                 }
+                if (bundle.containsKey("TEST")) {
+                    String test = bundle.getString("TEST");
+                    if ("ALL".equals(test)) {
+                        Constants.TEST_MODE = test;
+                    }
+                }
                 EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
             }
         }
