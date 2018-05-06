@@ -26,6 +26,7 @@ import com.emp.demo.R;
 import com.emp.demo.activity.MyDownloads;
 import com.emp.demo.activity.MyVideoPlayer;
 import com.emp.demo.activity.SearchResults;
+import com.emp.demo.activity.Settings;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.NetworkPolicy;
@@ -153,10 +154,23 @@ public class AppController extends Application {
 
     public static void loadActionBarMenu(Activity activity, Menu menu) {
         loadSearchUi(activity, menu);
+        loadSettings(activity, menu);
 
         if (EMPRegistry.chromecastAppId() != null) {
             CastButtonFactory.setUpMediaRouteButton(activity.getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
         }
+    }
+
+    public static void loadSettings(final Activity activity, Menu menu) {
+        final MenuItem settingsMenuItem = menu.findItem(R.id.settings);
+        settingsMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(activity.getApplicationContext(), Settings.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
+                return false;
+            }
+        });
     }
 
     public static void loadSearchUi(final Activity activity, Menu menu) {
