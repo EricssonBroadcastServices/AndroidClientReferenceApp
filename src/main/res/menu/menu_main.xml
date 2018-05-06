@@ -9,4 +9,8 @@
         android:title="@string/media_route_menu_title"
         app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"
         app:showAsAction="always"/>
+    <item android:id="@+id/settings"
+        android:title="Settings"
+        app:showAsAction="never"
+        app:actionViewClass="android.widget.SearchView" />
 </menu>
