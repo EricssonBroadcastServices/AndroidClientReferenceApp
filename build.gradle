@@ -2,7 +2,7 @@ ext {
     libraryTag = 'master-SNAPSHOT'
     compileSdkVersion = 26
     buildToolsVersion = "26.0.1"
-    supportLibVersion = "26.0.1"
+    supportLibVersion = "26.1.0"
     castFrameworkVersion = "10.0.1"
 }
 
@@ -68,11 +68,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
     compile "com.github.EricssonBroadcastServices:AndroidClientDownload:${project.ext.libraryTag}"
-    compile 'com.android.support:appcompat-v7:26.0.1'
-    compile 'com.android.support:design:26.0.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-v4:26.0.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
-    compile 'com.android.support:recyclerview-v7:25.0.+'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
     testCompile 'junit:junit:4.12'
 }
