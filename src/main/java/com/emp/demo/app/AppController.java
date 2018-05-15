@@ -157,7 +157,12 @@ public class AppController extends Application {
         loadSettings(activity, menu);
 
         if (EMPRegistry.chromecastAppId() != null) {
-            CastButtonFactory.setUpMediaRouteButton(activity.getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
+            try {
+                CastButtonFactory.setUpMediaRouteButton(activity.getApplicationContext(), menu, R.id.media_route_menu_item_refapp);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
