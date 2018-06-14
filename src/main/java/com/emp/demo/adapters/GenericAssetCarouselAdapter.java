@@ -13,6 +13,8 @@ import android.widget.Toast;
 import net.ericsson.emovs.download.DownloadProperties;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpImage;
+
+import com.emp.demo.activity.GenericAssetCarousel;
 import com.emp.demo.app.AppController;
 import com.emp.demo.R;
 import com.emp.demo.interfaces.IAssetCarouselAdapter;
@@ -28,9 +30,9 @@ import java.util.ArrayList;
  */
 public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAssetCarouselAdapter.ViewHolder> implements IAssetCarouselAdapter {
     ArrayList<EmpAsset> assets;
-    Activity root;
+    GenericAssetCarousel root;
 
-    public GenericAssetCarouselAdapter(Activity root) {
+    public GenericAssetCarouselAdapter(GenericAssetCarousel root) {
         this.root = root;
     }
 
@@ -108,7 +110,8 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
                 @Override
                 public void onClick(View view) {
                     //AppController.playOverlayAsset(root, asset);
-                    AppController.playAsset(root, asset, null);
+//                    AppController.playAsset(root, asset, null);
+                    root.showPlayer(root, asset, null);
                 }
             });
 
