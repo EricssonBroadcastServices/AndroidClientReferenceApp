@@ -81,7 +81,8 @@ public class AppController extends Application {
             Constants.BUSSINESS_UNIT = store.getBusinessUnit();
         }
 
-        EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+//        EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+        EMPRegistry.bindExposureContext(Constants.API_URL_PROD, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
     }
 
     public static void playAsset(final Context ctx, IPlayable playable, PlaybackProperties properties) {

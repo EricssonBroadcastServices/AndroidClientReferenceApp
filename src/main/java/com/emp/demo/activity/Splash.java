@@ -220,19 +220,21 @@ public class Splash extends Activity {
                 if (bundle.containsKey("ENV")) {
                     String env = bundle.getString("ENV");
                     if ("DEV".equals(env)) {
-                        Constants.API_URL = Constants.API_URL_DEV;
+//                        Constants.API_URL = Constants.API_URL_DEV;
+                        Constants.API_URL = Constants.API_URL_PROD;
                     }
                     else if ("PROD".equals(env)) {
                         Constants.API_URL = Constants.API_URL_PROD;
                     }
                 }
-                if (bundle.containsKey("TEST")) {
-                    String test = bundle.getString("TEST");
-                    if ("ALL".equals(test)) {
-                        Constants.TEST_MODE = test;
-                    }
-                }
-                EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+//                if (bundle.containsKey("TEST")) {
+//                    String test = bundle.getString("TEST");
+//                    if ("ALL".equals(test)) {
+//                        Constants.TEST_MODE = test;
+//                    }
+//                }
+//                EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+                EMPRegistry.bindExposureContext(Constants.API_URL_PROD, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
             }
         }
     }
