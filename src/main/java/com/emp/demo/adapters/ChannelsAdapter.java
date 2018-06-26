@@ -69,16 +69,19 @@ public class ChannelsAdapter extends BaseAdapter {
         //}
 
         TextView channelNameView = (TextView) view.findViewById(R.id.channel_name);
-        ImageView channelLogoView = (ImageView) view.findViewById(R.id.channel_logo);
+//        ImageView channelLogoView = (ImageView) view.findViewById(R.id.channel_logo);
+        View channelLogoView = view.findViewById(R.id.channel_logo);
 
         channelNameView.setText(channel.localized.getTitle("en"));
-        EmpImage image = AppController.getImage(channel.localized);
-        if (image != null && image.url != null) {
-            AppController.PICASSO.load(image.url).into(channelLogoView);
-        }
-        else {
-            AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(channelLogoView);
-        }
+//        EmpImage image = AppController.getImage(channel.localized);
+//        if (image != null && image.url != null) {
+//            AppController.PICASSO.load(image.url).into(channelLogoView);
+//        }
+//        else {
+//            AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(channelLogoView);
+//        }
+
+        channelLogoView.setBackgroundColor(channel.getId().hashCode());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

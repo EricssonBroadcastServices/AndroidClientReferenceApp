@@ -65,16 +65,19 @@ public class SeriesAdapter extends BaseAdapter {
         //}
 
         TextView channelNameView = (TextView) view.findViewById(R.id.series_name);
-        ImageView channelLogoView = (ImageView) view.findViewById(R.id.series_logo);
+//        ImageView channelLogoView = (ImageView) view.findViewById(R.id.series_logo);
+        View seriesLogoView = view.findViewById(R.id.series_logo);
 
         channelNameView.setText(series.localized.getTitle("en"));
-        EmpImage image = AppController.getImage(series.localized);
-        if (image != null && image.url != null) {
-            AppController.PICASSO.load(image.url).into(channelLogoView);
-        }
-        else {
-            AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(channelLogoView);
-        }
+//        EmpImage image = AppController.getImage(series.localized);
+//        if (image != null && image.url != null) {
+//            AppController.PICASSO.load(image.url).into(channelLogoView);
+//        }
+//        else {
+//            AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(channelLogoView);
+//        }
+
+        seriesLogoView.setBackgroundColor(series.seriesId.hashCode());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

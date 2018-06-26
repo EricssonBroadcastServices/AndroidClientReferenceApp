@@ -2,11 +2,13 @@ package com.emp.demo.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpImage;
@@ -58,24 +60,34 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+//        ImageView imageView;
+        AppCompatTextView tvTitle;
+        View vBottomLine;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.asset_img);
+//            imageView = (ImageView) itemView.findViewById(R.id.asset_img);
+            tvTitle = itemView.findViewById(R.id.asset_title);
+            vBottomLine = itemView.findViewById(R.id.asset_bottom_line);
         }
 
         public void render(final EmpAsset asset) {
 //            titleView.setText(asset.originalTitle);
 //            durationView.setText(asset.duration);
-            EmpImage image = AppController.getImage(asset.localized);
-            if (image != null && image.url != null) {
-                AppController.PICASSO.load(image.url).into(imageView);
-            }
-            else {
-                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
 
-            }
+//            EmpImage image = AppController.getImage(asset.localized);
+//            if (image != null && image.url != null) {
+//                AppController.PICASSO.load(image.url).into(imageView);
+//            }
+//            else {
+//                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
+//
+//            }
+
+            tvTitle.setText(asset.originalTitle);
+
+            vBottomLine.setBackgroundColor(asset.getId().hashCode());
+
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
