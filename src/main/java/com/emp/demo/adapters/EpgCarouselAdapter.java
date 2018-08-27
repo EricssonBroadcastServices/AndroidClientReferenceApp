@@ -95,7 +95,7 @@ public class EpgCarouselAdapter extends RecyclerView.Adapter<EpgCarouselAdapter.
         TextView dayRefView;
         TextView timeRefView;
         TextView descriptionView;
-        ImageView imageView;
+//        ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -103,7 +103,7 @@ public class EpgCarouselAdapter extends RecyclerView.Adapter<EpgCarouselAdapter.
             dayRefView = (TextView) itemView.findViewById(R.id.epg_program_datetime_dayref);
             timeRefView = (TextView) itemView.findViewById(R.id.epg_program_datetime_time);
             descriptionView = (TextView) itemView.findViewById(R.id.epg_program_description);
-            imageView = (ImageView) itemView.findViewById(R.id.epg_program_image);
+//            imageView = (ImageView) itemView.findViewById(R.id.epg_program_image);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -113,10 +113,11 @@ public class EpgCarouselAdapter extends RecyclerView.Adapter<EpgCarouselAdapter.
             timeRefView.setText(asset.getTime(EmpProgram.DateRef.START) + " - " + asset.getTime(EmpProgram.DateRef.END));
             EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
-                AppController.PICASSO.load(image.url).into(imageView);
+//                AppController.PICASSO.load(image.url).into(imageView);
+//                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
             }
             else {
-                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
+//                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
             }
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

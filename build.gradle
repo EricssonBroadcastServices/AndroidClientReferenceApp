@@ -41,6 +41,7 @@ android {
         applicationId "net.ericsson.emovs.mobile.referenceapp"
         minSdkVersion 19
         targetSdkVersion rootProject.ext.compileSdkVersion
+        multiDexEnabled true
         if (project.hasProperty('hasParentProject')) {
             versionCode buildVersionCode()
         }
@@ -55,6 +56,10 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries = false
     }
 }
 

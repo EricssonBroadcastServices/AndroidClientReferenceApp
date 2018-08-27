@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:background="@drawable/loading"
+        android:visibility="gone"
         android:scaleType="fitXY" />
 
     <RelativeLayout

@@ -14,6 +14,7 @@ android {
         targetSdkVersion rootProject.ext.compileSdkVersion
         versionCode buildVersionCode()
         versionName version
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,6 +25,10 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries = false
     }
 }
 
@@ -36,10 +41,12 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     if (project.hasProperty('hasParentProject')) {
+        println "HAS PARENT PROJECT ----------------"
         compile project(':libraries:playback')
         compile project(':libraries:download-media')
     }
     else {
+        println "NOOOOOOOOOOOOOO ================"
         compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
         compile "com.github.EricssonBroadcastServices:AndroidClientDownload:${project.ext.libraryTag}"
     }

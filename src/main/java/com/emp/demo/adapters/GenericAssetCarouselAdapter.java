@@ -99,7 +99,8 @@ public class GenericAssetCarouselAdapter extends RecyclerView.Adapter<GenericAss
             //dayRefView.setText(asset.timeHumanRefernce(EmpProgram.DateRef.START));
             EmpImage image = AppController.getImage(asset.localized);
             if (image != null && image.url != null) {
-                AppController.PICASSO.load(image.url).into(imageView);
+//                AppController.PICASSO.load(image.url).into(imageView);
+                AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
             }
             else {
                 AppController.PICASSO.load(R.drawable.noimage_thumbnail).into(imageView);
