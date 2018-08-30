@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 
 ext {
     libraryTag = 'master-SNAPSHOT'
+    compileSdkVersion = 27
+    buildToolsVersion = "27.0.0"
+    supportLibVersion = "27.0.0"
 }
 
 android {
@@ -43,12 +46,15 @@ dependencies {
         compile "com.github.EricssonBroadcastServices:AndroidClientPlayback:${project.ext.libraryTag}"
         compile "com.github.EricssonBroadcastServices:AndroidClientDownload:${project.ext.libraryTag}"
     }
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
+
+    compile "com.android.support:appcompat-v7:${project.ext.supportLibVersion}"
+    compile "com.android.support:design:${project.ext.supportLibVersion}"
+    compile "com.android.support:support-v4:${project.ext.supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${project.ext.supportLibVersion}"
+
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:support-v4:26.0.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+
     testCompile 'junit:junit:4.12'
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

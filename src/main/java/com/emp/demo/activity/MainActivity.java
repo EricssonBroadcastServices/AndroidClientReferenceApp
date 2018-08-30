@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         super.onCreate(savedInstanceState);
 		//OneSignal.startInit(this).init();
         setContentView(R.layout.activity_main);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ly = (FrameLayout) findViewById(R.id.container_body);
         ly.setVisibility(View.GONE);

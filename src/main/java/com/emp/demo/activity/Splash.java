@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.AppCompatButton;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -118,7 +118,7 @@ public class Splash extends Activity {
             splashLogoContainer.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_move_logo_up));
         }
 
-        Button btn = (Button) findViewById(R.id.btn_login);
+        AppCompatButton btn = findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
