@@ -1,5 +1,10 @@
 # Release Notes
 
+## 2.0.92
+
+### Enhancements
+- Added debug build type to main gradle file of project.
+
 ## 2.0.90-6
 
 ### Enhancements
