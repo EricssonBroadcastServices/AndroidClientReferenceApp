@@ -1,5 +1,7 @@
 package com.emp.demo.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,27 +10,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 
 import com.emp.demo.R;
-import com.emp.demo.adapters.DownloadListAdapter;
-import com.emp.demo.app.AppController;
 import com.emp.demo.app.Constants;
-
-import net.ericsson.emovs.download.DownloadItem;
-import net.ericsson.emovs.download.EMPDownloadProvider;
-import net.ericsson.emovs.download.interfaces.IDownload;
-
-import java.util.ArrayList;
 
 public class Settings extends AppCompatActivity {
     Toolbar mToolbar;
 
+    private final String PLAYBACK_SHARED_PREFERENCES = "PLAYBACK_SHARED_PREFERENCES";
+    private final String SECURITY_LEVEL_KEY = "securityLevel";
+    private final String SECURITY_LEVEL_L3 = "L3";
+    private SharedPreferences mPlaybackPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mPlaybackPreferences =
+                getApplicationContext().getSharedPreferences(PLAYBACK_SHARED_PREFERENCES,
+                                                             Context.MODE_PRIVATE);
+
         setContentView(R.layout.activity_settings);
+
         loadActionBar("Settings");
+
         loadUi();
     }
 
@@ -49,6 +54,31 @@ public class Settings extends AppCompatActivity {
         }
         else {
             testViewCheckbox.setChecked(false);
+        }
+
+        CheckBox securityLevelCheckbox = findViewById(R.id.cb_enable_l3);
+
+        securityLevelCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    mPlaybackPreferences.edit().putString(SECURITY_LEVEL_KEY, SECURITY_LEVEL_L3).apply();
+                } else {
+                    mPlaybackPreferences.edit().remove(SECURITY_LEVEL_KEY).apply();
+                }
+            }
+        });
+
+        if (mPlaybackPreferences.contains(SECURITY_LEVEL_KEY)) {
+            String securityLevel = mPlaybackPreferences.getString(SECURITY_LEVEL_KEY, "");
+
+            if (securityLevel.equals(SECURITY_LEVEL_L3)) {
+                securityLevelCheckbox.setChecked(true);
+            } else {
+                securityLevelCheckbox.setChecked(false);
+            }
+        } else {
+            securityLevelCheckbox.setChecked(false);
         }
     }
 
