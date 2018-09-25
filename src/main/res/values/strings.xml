@@ -43,4 +43,6 @@
     <string name="title_activity_my_downloads">My Downloads</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_splash">Splash</string>
+    <string name="enable_test_view">Enable Test View</string>
+    <string name="enable_l3_security_level">Enable L3 Security Level</string>
 </resources>
