@@ -1,5 +1,12 @@
 # Release Notes
 
+
+## 2.0.92-2
+
+### Enhancements
+- **EMP-11789** Added a checkbox on the Settings to enable/disable the security level to L3 on the license requests.
+Store this security level info on the playback shared preferences. 
+
 ## 2.0.92
 
 ### Enhancements
