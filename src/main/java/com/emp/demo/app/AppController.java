@@ -61,6 +61,9 @@ public class AppController extends Application {
         //LeakCanary.install(this);
         mInstance = this;
 
+        // Enable the playback throttling on start for the app
+        EMPRegistry.enablePlaybackThrottling();
+
         EMPRegistry.bindApplicationContext(this);
         EMPRegistry.bindChromecastAppId("E5A43176");
         bindExposureContext();
