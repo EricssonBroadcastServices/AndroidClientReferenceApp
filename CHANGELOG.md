@@ -1,5 +1,9 @@
 # Release Notes
 
+## 2.0.93-1
+
+### Enhancements
+- **EMP-11796** Enable playback throttling on the reference app.
 
 ## 2.0.92-2
 
