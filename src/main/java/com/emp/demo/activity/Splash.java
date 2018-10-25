@@ -27,9 +27,13 @@ import com.emp.demo.app.Constants;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
+import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.utilities.emp.EMPRegistry;
 import net.ericsson.emovs.utilities.interfaces.IMetadataCallback;
+import net.ericsson.emovs.utilities.models.EmpAsset;
+import net.ericsson.emovs.utilities.models.EmpChannel;
 import net.ericsson.emovs.utilities.models.EmpCustomer;
+import net.ericsson.emovs.utilities.models.EmpProgram;
 import net.ericsson.emovs.utilities.system.DeviceInfo;
 import net.ericsson.emovs.utilities.errors.Error;
 
@@ -38,6 +42,15 @@ import java.util.Calendar;
 public class Splash extends Activity {
 
     public static final String TAG = Splash.class.getSimpleName();
+
+    private static final String CUSTOMER_UNIT_KEY = "CU";
+    private static final String BUSINESS_UNIT_KEY = "BU";
+    private static final String ENVIRONMENT_KEY = "ENV";
+    private static final String TEST_KEY = "TEST";
+    private static final String ASSET_ID_KEY = "assetId";
+    private static final String CHANNEL_ID_KEY = "channelId";
+    private static final String PROGRAM_ID_KEY = "programId";
+    private static final String PLAY_FROM_KEY = "playFrom";
 
     private ProgressBar mProgressBar;
     private boolean isPressBack;
@@ -52,6 +65,10 @@ public class Splash extends Activity {
     private ImageView mImgLogo;
     protected boolean isShowingDialog;
 
+    private String mAssetId = "";
+    private String mChannelId = "";
+    private String mProgramId = "";
+    private String mPlayFrom = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +118,10 @@ public class Splash extends Activity {
                 @Override
                 public void onAuthSuccess(String sessionToken) {
                     mProgressBar.setVisibility(View.INVISIBLE);
-                    Intent mIntent = new Intent(Splash.this, MainActivity.class);
-                    startActivity(mIntent);
+
+                    launchMainActivity();
+                    checkAndLaunchPlayerActivity();
+
                     finish();
                 }
 
@@ -143,8 +162,10 @@ public class Splash extends Activity {
                                     @Override
                                     public void run() {
                                         mProgressBar.setVisibility(View.INVISIBLE);
-                                        Intent mIntent = new Intent(Splash.this, MainActivity.class);
-                                        startActivity(mIntent);
+
+                                        launchMainActivity();
+                                        checkAndLaunchPlayerActivity();
+
                                         finish();
                                     }
                                 }, 500);
@@ -184,6 +205,48 @@ public class Splash extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    private void launchMainActivity() {
+        Intent mIntent = new Intent(Splash.this, MainActivity.class);
+        startActivity(mIntent);
+    }
+
+    private void checkAndLaunchPlayerActivity() {
+        PlaybackProperties properties = null;
+
+        if (!mPlayFrom.isEmpty()) {
+            if (mPlayFrom.equals("beginning")) {
+                properties = new PlaybackProperties().withPlayFrom(PlaybackProperties.PlayFrom.BEGINNING);
+            } else if (mPlayFrom.equals("bookmark")) {
+                properties = new PlaybackProperties().withPlayFrom(PlaybackProperties.PlayFrom.BOOKMARK);
+            } else if (mPlayFrom.equals("defaultBehavior")) {
+                properties = new PlaybackProperties().withPlayFrom(PlaybackProperties.PlayFrom.START_TIME_DEFAULT);
+            } else if (mPlayFrom.startsWith("customPosition") || mPlayFrom.startsWith("customTime")) {
+                String[] playFromParams = mPlayFrom.split(":");
+                properties = new PlaybackProperties().withPlayFrom(
+                        new PlaybackProperties.PlayFrom.StartTime(Long.parseLong(playFromParams[1])));
+            }
+        }
+
+        if (!mAssetId.isEmpty()) {
+            EmpAsset asset = new EmpAsset();
+            asset.assetId = mAssetId;
+            AppController.playAsset(Splash.this, asset, properties);
+        } else {
+            if (!mChannelId.isEmpty()) {
+                if (!mProgramId.isEmpty()) {
+                    EmpProgram program = new EmpProgram();
+                    program.channelId = mChannelId;
+                    program.programId = mProgramId;
+                    AppController.playAsset(Splash.this, program, properties);
+                } else {
+                    EmpChannel channel = new EmpChannel();
+                    channel.channelId = mChannelId;
+                    AppController.playAsset(Splash.this, channel, properties);
+                }
+            }
+        }
+    }
+
     private void removeSharedValue(String property) {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("EMPDemoEnigmaTv", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -209,33 +272,46 @@ public class Splash extends Activity {
         if (intent != null && intent.getAction().equals("com.emp.demo.launchfrombrowser")){
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-                if (bundle.containsKey("CU")) {
-                    String customerId = bundle.getString("CU");
-                    Constants.CUSTOMER = customerId;
+                if (bundle.containsKey(CUSTOMER_UNIT_KEY)) {
+                    Constants.CUSTOMER = bundle.getString(CUSTOMER_UNIT_KEY);
                 }
-                if (bundle.containsKey("BU")) {
-                    String businessUnitId = bundle.getString("BU");
-                    Constants.BUSSINESS_UNIT = businessUnitId;
+                if (bundle.containsKey(BUSINESS_UNIT_KEY)) {
+                    Constants.BUSSINESS_UNIT = bundle.getString(BUSINESS_UNIT_KEY);;
                 }
-                if (bundle.containsKey("ENV")) {
-                    String env = bundle.getString("ENV");
+                if (bundle.containsKey(ENVIRONMENT_KEY)) {
+                    String env = bundle.getString(ENVIRONMENT_KEY);
                     if ("DEV".equals(env)) {
                         Constants.API_URL = Constants.API_URL_DEV;
-                    }
-                    else if ("PROD".equals(env)) {
+                    } else if ("PROD".equals(env)) {
                         Constants.API_URL = Constants.API_URL_PROD;
                     }
                 }
-                if (bundle.containsKey("TEST")) {
-                    String test = bundle.getString("TEST");
+                if (bundle.containsKey(TEST_KEY)) {
+                    String test = bundle.getString(TEST_KEY);
                     if ("ALL".equals(test)) {
                         Constants.TEST_MODE = test;
                     }
                 }
+
                 EMPRegistry.bindExposureContext(Constants.API_URL, Constants.CUSTOMER, Constants.BUSSINESS_UNIT);
+
+                if (bundle.containsKey(ASSET_ID_KEY)) {
+                    mAssetId = bundle.getString(ASSET_ID_KEY);
+                }
+
+                if (bundle.containsKey(CHANNEL_ID_KEY)) {
+                    mChannelId = bundle.getString(CHANNEL_ID_KEY);
+                }
+
+                if (bundle.containsKey(PROGRAM_ID_KEY)) {
+                    mProgramId = bundle.getString(PROGRAM_ID_KEY);
+                }
+
+                if (bundle.containsKey(PLAY_FROM_KEY)) {
+                    mPlayFrom = bundle.getString(PLAY_FROM_KEY);
+                }
             }
         }
     }
-
 }
 
