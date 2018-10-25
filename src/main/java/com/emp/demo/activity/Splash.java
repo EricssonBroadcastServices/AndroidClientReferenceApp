@@ -43,14 +43,14 @@ public class Splash extends Activity {
 
     public static final String TAG = Splash.class.getSimpleName();
 
-    private final String CUSTOMER_UNIT_KEY = "CU";
-    private final String BUSINESS_UNIT_KEY = "BU";
-    private final String ENVIRONMENT_KEY = "ENV";
-    private final String TEST_KEY = "TEST";
-    private final String ASSET_ID_KEY = "assetId";
-    private final String CHANNEL_ID_KEY = "channelId";
-    private final String PROGRAM_ID_KEY = "programId";
-    private final String PLAY_FROM_KEY = "playFrom";
+    private static final String CUSTOMER_UNIT_KEY = "CU";
+    private static final String BUSINESS_UNIT_KEY = "BU";
+    private static final String ENVIRONMENT_KEY = "ENV";
+    private static final String TEST_KEY = "TEST";
+    private static final String ASSET_ID_KEY = "assetId";
+    private static final String CHANNEL_ID_KEY = "channelId";
+    private static final String PROGRAM_ID_KEY = "programId";
+    private static final String PLAY_FROM_KEY = "playFrom";
 
     private ProgressBar mProgressBar;
     private boolean isPressBack;
