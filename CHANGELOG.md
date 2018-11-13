@@ -1,5 +1,10 @@
 # Release Notes
 
+## 2.0.95-2
+
+### Enhancements
+- **EMP-12137** added security_level in intent
+
 ## 2.0.95
 
 ### Enhancements

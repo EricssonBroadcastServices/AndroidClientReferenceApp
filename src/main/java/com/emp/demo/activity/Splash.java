@@ -18,24 +18,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
-import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
-
 import com.emp.demo.R;
 import com.emp.demo.app.AppController;
 import com.emp.demo.app.Constants;
 import com.github.ybq.android.spinkit.style.Circle;
 
+import net.ericsson.emovs.exposure.auth.EMPAuthProviderWithStorage;
+import net.ericsson.emovs.exposure.interfaces.IAuthenticationListener;
 import net.ericsson.emovs.exposure.metadata.EMPMetadataProvider;
 import net.ericsson.emovs.playback.PlaybackProperties;
 import net.ericsson.emovs.utilities.emp.EMPRegistry;
+import net.ericsson.emovs.utilities.errors.Error;
 import net.ericsson.emovs.utilities.interfaces.IMetadataCallback;
 import net.ericsson.emovs.utilities.models.EmpAsset;
 import net.ericsson.emovs.utilities.models.EmpChannel;
 import net.ericsson.emovs.utilities.models.EmpCustomer;
 import net.ericsson.emovs.utilities.models.EmpProgram;
 import net.ericsson.emovs.utilities.system.DeviceInfo;
-import net.ericsson.emovs.utilities.errors.Error;
 
 import java.util.Calendar;
 
@@ -47,10 +46,12 @@ public class Splash extends Activity {
     private static final String BUSINESS_UNIT_KEY = "BU";
     private static final String ENVIRONMENT_KEY = "ENV";
     private static final String TEST_KEY = "TEST";
+    private static final String SECURITY_LEVEL_KEY = "securityLevel";
     private static final String ASSET_ID_KEY = "assetId";
     private static final String CHANNEL_ID_KEY = "channelId";
     private static final String PROGRAM_ID_KEY = "programId";
     private static final String PLAY_FROM_KEY = "playFrom";
+    private final String PLAYBACK_SHARED_PREFERENCES = "PLAYBACK_SHARED_PREFERENCES";
 
     private ProgressBar mProgressBar;
     private boolean isPressBack;
@@ -247,22 +248,22 @@ public class Splash extends Activity {
         }
     }
 
-    private void removeSharedValue(String property) {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("EMPDemoEnigmaTv", MODE_PRIVATE);
+    private void removeSharedValue(String preferenceName,String property) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(preferenceName, MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.remove(property);
-        editor.commit();
+        editor.apply();
     }
 
-    private void setSharedValue(String property, String value) {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("EMPDemoEnigmaTv", MODE_PRIVATE);
+    private void setSharedValue(String preferenceName,String property, String value) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(preferenceName, MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(property, value);
-        editor.commit();
+        editor.apply();
     }
 
-    private String getSharedValue(String property) {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("EMPDemoEnigmaTv", MODE_PRIVATE);
+    private String getSharedValue(String preferenceName,String property) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(preferenceName, MODE_PRIVATE);
         return pref.getString(property, null);
     }
 
@@ -290,6 +291,14 @@ public class Splash extends Activity {
                     String test = bundle.getString(TEST_KEY);
                     if ("ALL".equals(test)) {
                         Constants.TEST_MODE = test;
+                    }
+                }
+                if (bundle.containsKey(SECURITY_LEVEL_KEY)) {
+                    String level = bundle.getString(SECURITY_LEVEL_KEY);
+                    if ("L3".equals(level)) {
+                        setSharedValue(PLAYBACK_SHARED_PREFERENCES, SECURITY_LEVEL_KEY, level);
+                    }else{
+                        removeSharedValue(PLAYBACK_SHARED_PREFERENCES, SECURITY_LEVEL_KEY);
                     }
                 }
 
